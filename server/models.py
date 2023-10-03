@@ -33,6 +33,9 @@ class Request(db.Model):
     user = db.relationship('User', back_populates='requests')
     client = db.relationship('Client', back_populates='requests')
 
+    def __repr__(self):
+        return f'<Request {self.id}. Location: {self.location}. Price: {self.price}.>'
+
 class Client(db.Model):
     __tablename__ = 'clients'
 
@@ -44,6 +47,9 @@ class Client(db.Model):
     requests = db.relationship('Request', back_populates='client')
     users = association_proxy('requests', 'user', creator=lambda user_obj: Request(user=user_obj))
     pets = db.relationship('Pet', back_populates='client')
+
+    def __repr__(self):
+        return f'<Client: {self.id}. Name: {self.name}. Age: {self.age}. Address: {self.address}. Debt: {self.debt}.>'
 
 class Pet(db.Model):
     __tablename__ = 'pets'
@@ -57,3 +63,6 @@ class Pet(db.Model):
     client_id = db.Column(db.Integer, db.ForeignKey('clients.id'))
     # relationships
     client = db.relationship('Client', back_populates='pets')
+
+    def __repr__(self):
+        return f'<Name: {self.name}. Age: {self.age}. Species: {self.species}.>'
