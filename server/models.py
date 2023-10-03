@@ -14,6 +14,7 @@ class User(db.Model):
     earnings = db.Column(db.Float)
     # relationships
     requests = db.relationship('Request', back_populates='user')
+    clients = association_proxy('requests', 'client', creator=lambda client_obj: Request(client=client_obj))
 
     def __repr__(self):
         return f'<User {self.id}. Name: {self.name}. Age: {self.age}. Email: {self.email}. Earnings: {self.earnings}.>'
@@ -41,6 +42,7 @@ class Client(db.Model):
     debt = db.Column(db.Float)
     # relationships
     requests = db.relationship('Request', back_populates='client')
+    users = association_proxy('requests', 'user', creator=lambda user_obj: Request(user=user_obj))
     pets = db.relationship('Pet', back_populates='client')
 
 class Pet(db.Model):
