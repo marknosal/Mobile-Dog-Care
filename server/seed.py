@@ -48,12 +48,17 @@ if __name__ == '__main__':
         print('Clients created...')
 
         # add pets
-        # pets = []
-        # available_species = ['dog', 'cat', 'bird', 'turtle', 'mammal', 'reptile', 'amphibian']
-        # for i in range(30):
-        #     new_pet = Pet(
-        #         name=fake.first_name(),
-        #         age=fake.random_int(min=0, max=200),
-        #         species=rc(available_species)
-        #     )
-        # print('Pets created...')
+        pets = []
+        available_species = ['dog', 'cat', 'bird', 'turtle', 'mammal', 'reptile', 'amphibian']
+        for i in range(30):
+            random_client = rc(clients)
+            new_pet = Pet(
+                name=fake.first_name(),
+                age=fake.random_int(min=0, max=200),
+                species=rc(available_species),
+                client_id=random_client.id
+            )
+            pets.append(new_pet)
+        db.session.add_all(pets)
+        db.session.commit()
+        print('Pets created...')

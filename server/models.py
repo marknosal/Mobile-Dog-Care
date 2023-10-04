@@ -49,7 +49,7 @@ class Client(db.Model):
     pets = db.relationship('Pet', back_populates='client')
 
     def __repr__(self):
-        return f'<Client: {self.id}. Name: {self.name}. Age: {self.age}. Address: {self.address}. Debt: {self.debt}.>'
+        return f'<Client: {self.id}. Name: {self.name}. Address: {self.address}. Debt: {self.debt}.>'
 
 class Pet(db.Model):
     __tablename__ = 'pets'
