@@ -9,8 +9,8 @@ import Pets from "./Pets";
 function App() {
   return (
     <div>
-      <div>Mobile Dog Care</div>
-      <NavBar />
+      <div className="centered-div-title">Mobile Dog Care</div>
+      <NavBar styles={{center: 'auto'}} />
       <Switch>
         <Route exact path='/'>
           <Home />

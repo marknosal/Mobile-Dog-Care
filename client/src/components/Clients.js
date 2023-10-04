@@ -2,6 +2,6 @@ import React from "react"
 
 export default function Clients() {
     return (
-        <div className="clients"></div>
+        <div className="clients">Clients</div>
     )
 }

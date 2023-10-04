@@ -5,3 +5,7 @@
   --text: hsla(0, 0%, 100%, 0.88);
 }
 
+.centered-div-title {
+  text-align: center;
+  color: darkslategrey;
+}
