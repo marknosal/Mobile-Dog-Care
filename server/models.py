@@ -4,8 +4,10 @@ from sqlalchemy.ext.associationproxy import association_proxy
 from config import db
 
 # Models go here!
-class User(db.Model):
+class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
+
+    serialize_rules = ('-requests.user',)
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
@@ -19,8 +21,10 @@ class User(db.Model):
     def __repr__(self):
         return f'<User {self.id}. Name: {self.name}. Age: {self.age}. Email: {self.email}. Earnings: {self.earnings}.>'
 
-class Request(db.Model):
+class Request(db.Model, SerializerMixin):
     __tablename__ = 'requests'
+
+    serialize_rules = ('-user.requests', '-client.requests',)
 
     id = db.Column(db.Integer, primary_key=True)
     details = db.Column(db.String)
@@ -37,8 +41,10 @@ class Request(db.Model):
     def __repr__(self):
         return f'<Request {self.id}. Location: {self.location}. Price: {self.price}.>'
 
-class Client(db.Model):
+class Client(db.Model, SerializerMixin):
     __tablename__ = 'clients'
+
+    serialize_rules = ('-requests.client', '-pets.client',)
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
@@ -52,7 +58,7 @@ class Client(db.Model):
     def __repr__(self):
         return f'<Client: {self.id}. Name: {self.name}. Address: {self.address}. Debt: {self.debt}.>'
 
-class Pet(db.Model):
+class Pet(db.Model, SerializerMixin):
     __tablename__ = 'pets'
 
     id = db.Column(db.Integer, primary_key=True)
