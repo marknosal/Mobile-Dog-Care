@@ -72,9 +72,10 @@ if __name__ == '__main__':
         requests = []
         for i in range(15):
             rand_client = rc(clients)
-            rand_client_pets = [pet.name for pet in rand_client.pets]
+            rand_client_pets = [pet for pet in rand_client.pets]
+            rand_pet = rc(rand_client_pets)
             new_request = Request(
-                details=f'{rc(rand_client_pets)}, ' + fake.sentence(),
+                details=f'{rand_pet.species}: {rand_pet.name}, ' + fake.sentence(),
                 location=fake.address(),
                 price=randint(20, 500),
                 client_id=rand_client.id,

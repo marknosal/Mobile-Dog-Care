@@ -26,6 +26,7 @@ class Request(db.Model):
     details = db.Column(db.String)
     location = db.Column(db.String)
     price = db.Column(db.Float)
+    complete = db.Column(db.Boolean, default=False)
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     client_id = db.Column(db.Integer, db.ForeignKey('clients.id'))
