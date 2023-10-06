@@ -11,15 +11,15 @@ export default function Requests() {
             .then(data => setRequests(data))
     }, [])
     //filter requests based on 'completed' attribute
-    const completedRequests = requests.filter(r => r.completed)
-    const incompleteRequests = requests.filter(r => !r.completed)
+    const completedRequests = requests.filter(r => r.complete)
+    const incompleteRequests = requests.filter(r => !r.complete)
 
     
     return (
         <div className="requests-main">
-            <CompleteRequests allRequests={completedRequests} />
-            <hr/>
             <IncompleteRequests allRequests={incompleteRequests} />
+            <hr/>
+            <CompleteRequests allRequests={completedRequests} />
             <hr/>
         </div>
     )
