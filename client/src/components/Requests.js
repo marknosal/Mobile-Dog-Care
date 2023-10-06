@@ -5,7 +5,7 @@ export default function Requests() {
     useEffect(() => {
         fetch('/requests')
             .then(response => response.json())
-            .then(data => setRequests(data))
+            .then(data => console.log(data))
     }, [])
     return (
         <div className="requests-main">
