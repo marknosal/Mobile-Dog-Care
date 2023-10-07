@@ -87,7 +87,7 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick }) {
                         onChange={formik.handleChange}
                         value={formik.values.location}
                     />
-                    <p></p>
+                    <p>{formik.errors.location}</p>
                 </div>
                 <div>
                     <label htmlFor="price">Price:</label>
@@ -98,6 +98,7 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick }) {
                         onChange={formik.handleChange}
                         value={formik.values.price}
                     />
+                    <p>{formik.errors.price}</p>
                 </div>
                 <button type="submit">Save</button>
             </form>
