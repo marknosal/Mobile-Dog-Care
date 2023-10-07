@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useFormik } from 'formik';
 
 export default function ExpandedRequest ({ expandedRequest, onExpandClick }) {
     //state
@@ -18,13 +19,13 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick }) {
     function handleEditClick() {
         setIsEditMode(!isEditMode)
     }
-
-
-    return (
-        <div className="request-container" style={{position: 'relative'}}>
-            <h2>Request: {expandedRequest.id}</h2>
-            <button onClick={onExpandClick} style={xButtonStyle}>X</button>
-            <button onClick={handleEditClick} style={editButtonStyle}>Edit</button>
+    function requestEditForm() {
+        return (
+            <h1>Edit Form</h1>
+        )
+    }
+    function requestAllDetails() {
+        return (
             <div>
                 <h3>Request Details: </h3>
                 {expandedRequest.details}
@@ -33,6 +34,16 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick }) {
                 <h3>Price: </h3>
                 ${expandedRequest.price}
             </div>
+        )
+    }
+
+
+    return (
+        <div className="request-container" style={{position: 'relative'}}>
+            <h2>Request: {expandedRequest.id}</h2>
+            <button onClick={onExpandClick} style={xButtonStyle}>X</button>
+            <button onClick={handleEditClick} style={editButtonStyle}>{isEditMode ? "Save" : "Edit"}</button>
+            {isEditMode ? requestEditForm() : requestAllDetails()}
         </div>
     )
 }
