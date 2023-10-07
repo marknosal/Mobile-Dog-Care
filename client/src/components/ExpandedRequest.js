@@ -35,8 +35,15 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick }) {
         },
         validationSchema: forSchema,
         onSubmit: (values) => {
-            // form submission
-            console.log(values);
+            fetch(`/requests/${expandedRequest.id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(values, null, 2)
+            })
+                .then(response=>response.json())
+                .then(data=>console.log(data))
         }
     });
 
