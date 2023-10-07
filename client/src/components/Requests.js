@@ -22,23 +22,16 @@ export default function Requests() {
     const expandedRequest = requests.find(r => r.id === expandedRequestId)
 
     function handleRequestClick (requestId) {
-        if (expandedRequestId === requestId) {
-            setExpandedRequestId(null)
-        } else {
-            setExpandedRequestId(requestId)
-        }
+        expandedRequestId ? setExpandedRequestId(null) : setExpandedRequestId(requestId)
     }
 
-    function handleRevertClick () {
-        setExpandedRequestId(null)
-    }
     
     return (
         <div className="requests-main">
-            {expandedRequestId ? <ExpandedRequest expandedRequest={expandedRequest} onRevertClick = {handleRevertClick} /> : <IncompleteRequests allRequests={incompleteRequests} onRequestClick={handleRequestClick} />}
-            <hr/>
-            <CompleteRequests allRequests={completedRequests} />
-            <hr/>
+            {expandedRequestId ? 
+                <ExpandedRequest expandedRequest={expandedRequest} onExpandClick = {handleRequestClick} /> : 
+                <IncompleteRequests allRequests={incompleteRequests} onExpandClick={handleRequestClick} />}
+            <CompleteRequests allRequests={completedRequests} onExpandClick={handleRequestClick} />
         </div>
     )
 }

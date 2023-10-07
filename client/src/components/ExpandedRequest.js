@@ -1,9 +1,11 @@
 import React from "react";
 
-export default function ExpandedRequest ({ expandedRequest, onRevertClick }) {
+export default function ExpandedRequest ({ expandedRequest, onExpandClick }) {
     return (
-        <div>
-            <h2 onClick={onRevertClick}>Request: {expandedRequest.id}</h2>
+        <div className="request-container">
+            <h2>Request: {expandedRequest.id}</h2>
+            <button onClick={onExpandClick}>X</button>
+            <hr />
         </div>
     )
 }
