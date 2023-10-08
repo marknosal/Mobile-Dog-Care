@@ -57,8 +57,8 @@ class Client(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
-    address = db.Column(db.String)
-    debt = db.Column(db.Float)
+    address = db.Column(db.String, default='')
+    debt = db.Column(db.Float, default=0)
     # relationships
     requests = db.relationship('Request', back_populates='client')
     users = association_proxy('requests', 'user', creator=lambda user_obj: Request(user=user_obj))

@@ -6,11 +6,12 @@
 from flask import request, make_response
 from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
+import datetime
 
 # Local imports
 from config import app, db, api
 # Add your model imports
-from models import User, Request, Client
+from models import User, Request, Client, Pet
 
 # Views go here!
 
@@ -26,11 +27,20 @@ class Requests(Resource):
     
     def post(self):
         data = request.get_json()
+        existing_client = Client.query.filter_by(name=data['client']).first()
+        datetime_obj = datetime.datetime.strptime(data['datetime'], '%Y-%m-%dT%H:%M')
+        if existing_client:
+            existing_pet = next((pet for pet in existing_client.pets if pet.name == data['pet']), None)
+        else:
+            existing_pet = None
         try:
             newRequest = Request(
+                client=existing_client if existing_client else Client(name=data['client']),
+                pet=existing_pet if existing_pet else Pet(name=data['pet'], client=newRequest.client),
                 details=data['details'],
                 location=data['location'],
-                price=data['price']
+                price=data['price'],
+                datetime=datetime_obj
             )
             db.session.add(newRequest)
             db.session.commit()
