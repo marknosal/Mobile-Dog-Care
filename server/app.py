@@ -5,7 +5,7 @@
 # Remote library imports
 from flask import request, make_response
 from flask_restful import Resource
-
+from sqlalchemy.exc import IntegrityError
 
 # Local imports
 from config import app, db, api
