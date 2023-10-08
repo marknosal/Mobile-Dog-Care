@@ -34,9 +34,11 @@ class Requests(Resource):
         else:
             existing_pet = None
         try:
+            requestClient = existing_client if existing_client else Client(name=data['client'])
+            requestPet = existing_pet if existing_pet else Pet(name=data['pet'], client=requestClient)
             newRequest = Request(
-                client=existing_client if existing_client else Client(name=data['client']),
-                pet=existing_pet if existing_pet else Pet(name=data['pet'], client=newRequest.client),
+                client=requestClient,
+                pet=requestPet,
                 details=data['details'],
                 location=data['location'],
                 price=data['price'],
