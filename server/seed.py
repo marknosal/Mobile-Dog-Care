@@ -75,13 +75,16 @@ if __name__ == '__main__':
             rand_client = rc(clients)
             rand_client_pets = [pet for pet in rand_client.pets]
             rand_pet = rc(rand_client_pets)
+            time=datetime.now() + timedelta(days=randint(1,30), hours=randint(1,24))
+
             new_request = Request(
                 details=f'{rand_pet.species}: {rand_pet.name}, ' + fake.sentence(),
                 location=fake.address(),
                 price=randint(20, 500),
                 client_id=rand_client.id,
                 user_id=rc(users).id,
-                pet=rand_pet
+                pet=rand_pet,
+                datetime=time
             )
             db.session.add(new_request)
             requests.append(new_request)
