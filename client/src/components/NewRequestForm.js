@@ -2,7 +2,7 @@ import React from "react";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
-export default function NewRequestForm ({ onAddRequest, setNewRequest, newRequest }) {
+export default function NewRequestForm ({ onAddRequest, onNewRequestState }) {
 
     const forSchema = yup.object().shape({
         client: yup.string().required('Must exist').min(5),
@@ -35,11 +35,15 @@ export default function NewRequestForm ({ onAddRequest, setNewRequest, newReques
             .then(response=>response.json())
             .then(data=> {
                     onAddRequest(data)
-                    setNewRequest(!newRequest)
+                    onNewRequestState()
                 }
             )
         }
     })
+
+    function handleNewRequestStateClick() {
+        onNewRequestState()
+    }
 
 
     return (
@@ -112,6 +116,7 @@ export default function NewRequestForm ({ onAddRequest, setNewRequest, newReques
                     <p>{formik.errors.datetime}</p>
                 </div>
                 <button type="submit">Submit</button>
+                <button onClick={handleNewRequestStateClick}>Cancel</button>
             </form>
         </div>
     )

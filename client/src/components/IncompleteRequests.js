@@ -18,6 +18,10 @@ export default function IncompleteRequests({ incompleteRequests, onExpandClick, 
             </div>
         )
     }
+    function handleNewRequestState() {
+        setNewRequest(!newRequest)
+    }
+
     return (
         <div className="request-container">
             <h2>Incompleted Requests</h2>
@@ -30,7 +34,10 @@ export default function IncompleteRequests({ incompleteRequests, onExpandClick, 
                 </button>
             </div>
             {newRequest ? 
-                <NewRequestForm onAddRequest={onAddRequest} setNewRequest={setNewRequest} newRequest={newRequest} /> : requestCardContainer()}
+                <NewRequestForm 
+                    onAddRequest={onAddRequest} 
+                    onNewRequestState={handleNewRequestState} 
+                /> : requestCardContainer()}
         </div>
     )
 }
