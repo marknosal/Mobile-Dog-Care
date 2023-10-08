@@ -1,6 +1,7 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import validates
+from datetime import datetime, timedelta
 
 from config import db
 
@@ -32,6 +33,8 @@ class Request(db.Model, SerializerMixin):
     location = db.Column(db.String)
     price = db.Column(db.Float)
     complete = db.Column(db.Boolean, default=False)
+    datetime = db.Column(db.DateTime, default=datetime.utcnow())
+
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     client_id = db.Column(db.Integer, db.ForeignKey('clients.id'))
