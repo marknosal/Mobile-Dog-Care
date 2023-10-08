@@ -2,6 +2,7 @@ from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import validates
 from datetime import datetime, timedelta
+import ipdb
 
 from config import db
 
@@ -26,7 +27,8 @@ class User(db.Model, SerializerMixin):
 class Request(db.Model, SerializerMixin):
     __tablename__ = 'requests'
 
-    serialize_rules = ('-user.requests', '-client.requests',)
+    serialize_rules = ('-user.requests', '-client.requests', '-pet.requests', '-pet.client')
+
 
     id = db.Column(db.Integer, primary_key=True)
     details = db.Column(db.String)
@@ -42,7 +44,7 @@ class Request(db.Model, SerializerMixin):
     # relationships
     user = db.relationship('User', back_populates='requests')
     client = db.relationship('Client', back_populates='requests')
-    pet = db.relationship('Pet', back_populates='request')
+    pet = db.relationship('Pet', back_populates='requests')
 
 
     def __repr__(self):
@@ -68,6 +70,8 @@ class Client(db.Model, SerializerMixin):
 class Pet(db.Model, SerializerMixin):
     __tablename__ = 'pets'
 
+    serialize_rules =('-client.requests','-requests', '-client.users', '-client.pets')
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     age = db.Column(db.Integer)
@@ -77,7 +81,7 @@ class Pet(db.Model, SerializerMixin):
     client_id = db.Column(db.Integer, db.ForeignKey('clients.id'))
     # relationships
     client = db.relationship('Client', back_populates='pets')
-    request = db.relationship('Request', back_populates='pet')
+    requests = db.relationship('Request', back_populates='pet')
 
     def __repr__(self):
         return f'<Name: {self.name}. Age: {self.age}. Species: {self.species}.>'
