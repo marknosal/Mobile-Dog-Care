@@ -19,6 +19,13 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick, onSta
         right: 5,
     };
 
+    const completeButtonStyle = {
+        postition: 'absolute',
+        bottom: 1,
+        left: 5,
+        marginTop: '10px',
+    }
+
     // Yup
     const forSchema = yup.object().shape({
         details: yup.string().required('Request details must exist').min(5),
@@ -66,6 +73,10 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick, onSta
                 <div>
                     <h3>Location: </h3>
                     {expandedRequest.location}
+                </div>
+                <div>
+                    <h3>Time: </h3>
+                    {expandedRequest.datetime}
                 </div>
                 <div>
                     <h3>Price: </h3>
@@ -124,6 +135,7 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick, onSta
                 {isEditMode ? "Cancel" : "Edit"}
             </button>
             {isEditMode ? requestEditForm() : requestAllDetails()}
+            <button style={completeButtonStyle}>New</button>
         </div>
     );
 }

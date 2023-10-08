@@ -70,7 +70,8 @@ class Client(db.Model, SerializerMixin):
 class Pet(db.Model, SerializerMixin):
     __tablename__ = 'pets'
 
-    serialize_rules =('-client.requests','-requests', '-client.users', '-client.pets')
+    # serialize_rules =('-client.requests','-requests', '-client.users', '-client.pets')
+    serialize_rules = ('-requests',)
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
