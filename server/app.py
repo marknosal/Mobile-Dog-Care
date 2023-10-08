@@ -24,6 +24,12 @@ class Requests(Resource):
         response = make_response(response_to_dict, 200)
         return response
     
+    def post(self):
+        data = request.get_json()
+        newRequest = Request(
+            
+        )
+    
 api.add_resource(Requests, '/requests')
 
 class RequestsById(Resource):
@@ -39,6 +45,9 @@ class RequestsById(Resource):
         db.session.add(requestPatch)
         db.session.commit()
         return requestPatch.to_dict(), 200
+    
+    def delete(self, id):
+        pass
 
 api.add_resource(RequestsById, '/requests/<int:id>')
 
