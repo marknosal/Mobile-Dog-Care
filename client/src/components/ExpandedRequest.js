@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
-export default function ExpandedRequest ({ expandedRequest, onExpandClick }) {
+export default function ExpandedRequest ({ expandedRequest, onExpandClick, onStateRequests }) {
     //state
     const [isEditMode, setIsEditMode] = useState(false);
 
@@ -23,7 +23,7 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick }) {
     const forSchema = yup.object().shape({
         details: yup.string().required('Request details must exist').min(5),
         location: yup.string().required('Request must have location').min(5),
-        price: yup.number().required('Price is required.  You don\'t work for free').min(1.00)
+        price: yup.number().typeError('Price must be a number').required('Price is required.  You don\'t work for free').min(1.00)
     })
 
     // useFormik
@@ -43,7 +43,7 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick }) {
                 body: JSON.stringify(values, null, 2)
             })
                 .then(response=>response.json())
-                .then(data=>console.log(data))
+                .then(data=>onStateRequests(data))
         }
     });
 
@@ -117,7 +117,7 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick }) {
             <h2>Request: {expandedRequest.id}</h2>
             <button onClick={onExpandClick} style={xButtonStyle}>X</button>
             <button onClick={handleEditClick} style={editButtonStyle}>
-                {isEditMode ? "Save" : "Edit"}
+                {isEditMode ? "Cancel" : "Edit"}
             </button>
             {isEditMode ? requestEditForm() : requestAllDetails()}
         </div>
