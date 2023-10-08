@@ -46,6 +46,7 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick, onSta
             fetch(`/requests/${expandedRequest.id}`, {
                 method: 'PATCH',
                 headers: {
+                    'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(values, null, 2)
