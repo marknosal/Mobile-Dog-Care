@@ -24,10 +24,14 @@ export default function Requests() {
     function handleRequestClick (requestId) {
         expandedRequestId ? setExpandedRequestId(null) : setExpandedRequestId(requestId)
     }
-    function handleStateRequests(newRequest) {
+    function handleEditRequest(editedRequest) {
         const updatedRequests = requests.map(r =>
-            r.id === newRequest.id ? newRequest : r
+            r.id === editedRequest.id ? editedRequest : r
         )
+        setRequests(updatedRequests)
+    }
+    function handleAddRequest(newRequest) {
+        const updatedRequests = [...requests, newRequest]
         setRequests(updatedRequests)
     }
 
@@ -37,13 +41,14 @@ export default function Requests() {
             {expandedRequestId ? 
                 <ExpandedRequest 
                     expandedRequest = {expandedRequest} 
-                    onStateRequests = {handleStateRequests} 
+                    onEditRequest = {handleEditRequest} 
                     onExpandClick = {handleRequestClick} /> : 
                 <IncompleteRequests 
-                    allRequests={incompleteRequests} 
+                    incompleteRequests={incompleteRequests}
+                    onAddRequest={handleAddRequest}
                     onExpandClick={handleRequestClick} />}
             <CompleteRequests 
-                allRequests={completedRequests} 
+                completedRequests={completedRequests} 
                 onExpandClick={handleRequestClick} />
         </div>
     )

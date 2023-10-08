@@ -4,13 +4,13 @@ import '../index.css';
 import NewRequestForm from "./NewRequestForm";
 
 
-export default function IncompleteRequests({ allRequests, onExpandClick }) {
+export default function IncompleteRequests({ incompleteRequests, onExpandClick, onAddRequest }) {
     const [newRequest, setNewRequest] = useState(null)
 
     function requestCardContainer() {
         return (
             <div className="request-card-container">
-                {allRequests.map(r => (
+                {incompleteRequests.map(r => (
                     <div key={r.id} className="request-card">
                         <RequestCard request={r} onExpandClick={onExpandClick} />
                     </div>
@@ -29,14 +29,8 @@ export default function IncompleteRequests({ allRequests, onExpandClick }) {
                     Add New Request
                 </button>
             </div>
-            {newRequest ? <NewRequestForm /> : requestCardContainer()}
-            {/* <div className="request-card-container">
-                {allRequests.map(r => (
-                    <div key={r.id} className="request-card">
-                        <RequestCard request={r} onExpandClick={onExpandClick} />
-                    </div>
-                ))}
-            </div> */}
+            {newRequest ? 
+                <NewRequestForm onAddRequest={onAddRequest} /> : requestCardContainer()}
         </div>
     )
 }

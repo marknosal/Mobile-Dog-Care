@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
-export default function ExpandedRequest ({ expandedRequest, onExpandClick, onStateRequests }) {
+export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEditRequest }) {
     //state
     const [isEditMode, setIsEditMode] = useState(false);
 
@@ -52,7 +52,7 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick, onSta
                 body: JSON.stringify(values, null, 2)
             })
                 .then(response=>response.json())
-                .then(data=>onStateRequests(data))
+                .then(data=>onEditRequest(data))
         }
     });
 
@@ -116,7 +116,7 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick, onSta
                 <div>
                     <label htmlFor="price">Price:</label>
                     <input
-                        type="float"
+                        type="number"
                         id="price"
                         name="price"
                         onChange={formik.handleChange}
