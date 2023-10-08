@@ -78,7 +78,7 @@ if __name__ == '__main__':
             time=datetime.now() + timedelta(days=randint(1,30), hours=randint(1,24))
 
             new_request = Request(
-                details=f'{rand_pet.species}: {rand_pet.name}, ' + fake.sentence(),
+                details=fake.sentence(),
                 location=fake.address(),
                 price=randint(20, 500),
                 client_id=rand_client.id,
