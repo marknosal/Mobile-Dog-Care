@@ -57,7 +57,11 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick, onSta
             <div>
                 <div>
                     <h3>Request Details: </h3>
-                    {expandedRequest.details}
+                    <ul>
+                        <li><strong>Pet name:</strong> {expandedRequest.client?.pets[0]?.name}</li>
+                        <li><strong>Species:</strong> {expandedRequest.client.pets[0].species}</li>
+                        <li><strong>Instructions:</strong> {expandedRequest.details}</li>
+                    </ul>
                 </div>
                 <div>
                     <h3>Location: </h3>

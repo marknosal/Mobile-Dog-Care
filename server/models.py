@@ -38,9 +38,12 @@ class Request(db.Model, SerializerMixin):
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     client_id = db.Column(db.Integer, db.ForeignKey('clients.id'))
+    pet_id = db.Column(db.Integer, db.ForeignKey('pets.id'))
     # relationships
     user = db.relationship('User', back_populates='requests')
     client = db.relationship('Client', back_populates='requests')
+    pet = db.relationship('Pet', back_populates='request')
+
 
     def __repr__(self):
         return f'<Request {self.id}. Location: {self.location}. Price: {self.price}.>'
@@ -74,6 +77,7 @@ class Pet(db.Model, SerializerMixin):
     client_id = db.Column(db.Integer, db.ForeignKey('clients.id'))
     # relationships
     client = db.relationship('Client', back_populates='pets')
+    request = db.relationship('Request', back_populates='pet')
 
     def __repr__(self):
         return f'<Name: {self.name}. Age: {self.age}. Species: {self.species}.>'

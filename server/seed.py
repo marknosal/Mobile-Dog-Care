@@ -2,6 +2,7 @@
 
 # Standard library imports
 from random import randint, choice as rc
+from datetime import datetime, timedelta
 
 # Remote library imports
 from faker import Faker
@@ -80,9 +81,10 @@ if __name__ == '__main__':
                 price=randint(20, 500),
                 client_id=rand_client.id,
                 user_id=rc(users).id,
+                pet=rand_pet
             )
+            db.session.add(new_request)
             requests.append(new_request)
-        db.session.add_all(requests)
         db.session.commit()
         print('Requests created...')
 
