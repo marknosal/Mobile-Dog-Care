@@ -26,9 +26,17 @@ class Requests(Resource):
     
     def post(self):
         data = request.get_json()
-        newRequest = Request(
-            
-        )
+        try:
+            newRequest = Request(
+                details=data['details'],
+                location=data['location'],
+                price=data['price']
+            )
+            db.session.add(newRequest)
+            db.session.commit()
+            return newRequest.to_dict(), 201
+        except IntegrityError:
+            return {'error': 'IntegrityError'}, 400
     
 api.add_resource(Requests, '/requests')
 

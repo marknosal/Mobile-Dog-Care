@@ -68,7 +68,7 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEdi
                     <h3>Request Details: </h3>
                     <ul>
                         <li><strong>Pet name:</strong> {expandedRequest.client?.pets[0]?.name}</li>
-                        <li><strong>Species:</strong> {expandedRequest.client.pets[0].species}</li>
+                        <li><strong>Species:</strong> {expandedRequest.client?.pets[0]?.species}</li>
                         <li><strong>Instructions:</strong> {expandedRequest.details}</li>
                     </ul>
                 </div>

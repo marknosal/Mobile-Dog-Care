@@ -30,7 +30,7 @@ export default function IncompleteRequests({ incompleteRequests, onExpandClick, 
                 </button>
             </div>
             {newRequest ? 
-                <NewRequestForm onAddRequest={onAddRequest} /> : requestCardContainer()}
+                <NewRequestForm onAddRequest={onAddRequest} setNewRequest={setNewRequest} newRequest={newRequest} /> : requestCardContainer()}
         </div>
     )
 }
