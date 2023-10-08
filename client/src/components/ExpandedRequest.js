@@ -24,6 +24,7 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick, onSta
         bottom: 1,
         left: 5,
         marginTop: '10px',
+        display: isEditMode ? 'none' : 'block',
     }
 
     // Yup
