@@ -5,16 +5,20 @@ import * as yup from 'yup';
 export default function NewRequestForm ({ onAddRequest, setNewRequest, newRequest }) {
 
     const forSchema = yup.object().shape({
+        client: yup.string().required('Must exist').min(5),
         details: yup.string().required('Must exist').min(5),
         location: yup.string().required('Must exist').min(5),
-        price: yup.number().typeError('Must be number').required('Must exist').min(1.0)
+        price: yup.number().typeError('Must be number').required('Must exist').min(1.0),
+        datetime: yup.string()
     })
 
     const formik = useFormik({
         initialValues: {
+            client: '',
             details: '',
             location: '',
-            price: ''
+            price: '',
+            datetime: ''
         },
         validationSchema: forSchema,
         onSubmit: (values) => {
@@ -36,11 +40,20 @@ export default function NewRequestForm ({ onAddRequest, setNewRequest, newReques
     })
 
 
-
-
     return (
         <div className="request-form-container">
             <form onSubmit={formik.handleSubmit}>
+                <div>
+                    <label htmlFor="client">Client:</label>
+                    <input
+                        type="text"
+                        id="client"
+                        name="client"
+                        onChange={formik.handleChange}
+                        value={formik.values.client}
+                    />
+                    <p>{formik.errors.client}</p>
+                </div>
                 <div>
                     <label htmlFor="details">Details:</label>
                     <input
@@ -73,7 +86,17 @@ export default function NewRequestForm ({ onAddRequest, setNewRequest, newReques
                         value={formik.values.price}
                     />
                     <p>{formik.errors.price}</p>
-
+                </div>
+                <div>
+                    <label htmlFor="datetime">Date:</label>
+                    <input
+                        type="datetime-local"
+                        id="datetime"
+                        name="datetime"
+                        onChange={formik.handleChange}
+                        value={formik.values.datetime}
+                    />
+                    <p>{formik.errors.datetime}</p>
                 </div>
                 <button type="submit">Submit</button>
             </form>
