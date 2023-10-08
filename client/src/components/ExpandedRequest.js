@@ -135,7 +135,7 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick, onSta
                 {isEditMode ? "Cancel" : "Edit"}
             </button>
             {isEditMode ? requestEditForm() : requestAllDetails()}
-            <button style={completeButtonStyle}>New</button>
+            <button style={completeButtonStyle}>Complete Request</button>
         </div>
     );
 }
