@@ -6,15 +6,17 @@ export default function NewRequestForm ({ onAddRequest, setNewRequest, newReques
 
     const forSchema = yup.object().shape({
         client: yup.string().required('Must exist').min(5),
+        pet: yup.string().required('Must exist').min(2),
         details: yup.string().required('Must exist').min(5),
         location: yup.string().required('Must exist').min(5),
         price: yup.number().typeError('Must be number').required('Must exist').min(1.0),
-        datetime: yup.string()
+        datetime: yup.string().required('Must exist')
     })
 
     const formik = useFormik({
         initialValues: {
             client: '',
+            pet: '',
             details: '',
             location: '',
             price: '',
@@ -22,7 +24,7 @@ export default function NewRequestForm ({ onAddRequest, setNewRequest, newReques
         },
         validationSchema: forSchema,
         onSubmit: (values) => {
-            fetch('/requests', {
+            fetch(`/requests`, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -30,12 +32,12 @@ export default function NewRequestForm ({ onAddRequest, setNewRequest, newReques
                 },
                 body: JSON.stringify(values)
             })
-                .then(response=>response.json())
-                .then(data=> {
-                        onAddRequest(data)
-                        setNewRequest(!newRequest)
-                    }
-                )
+            .then(response=>response.json())
+            .then(data=> {
+                    onAddRequest(data)
+                    setNewRequest(!newRequest)
+                }
+            )
         }
     })
 
@@ -53,6 +55,17 @@ export default function NewRequestForm ({ onAddRequest, setNewRequest, newReques
                         value={formik.values.client}
                     />
                     <p>{formik.errors.client}</p>
+                </div>
+                <div>
+                    <label htmlFor="pet">Pet:</label>
+                    <input
+                        type='text'
+                        id='pet'
+                        name='pet'
+                        onChange={formik.handleChange}
+                        value={formik.values.pet}
+                    />
+                    <p>{formik.errors.pet}</p>
                 </div>
                 <div>
                     <label htmlFor="details">Details:</label>
