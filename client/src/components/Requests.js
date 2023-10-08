@@ -35,9 +35,16 @@ export default function Requests() {
     return (
         <div className="requests-main">
             {expandedRequestId ? 
-                <ExpandedRequest expandedRequest={expandedRequest} onStateRequests={handleStateRequests} onExpandClick = {handleRequestClick} /> : 
-                <IncompleteRequests allRequests={incompleteRequests} onExpandClick={handleRequestClick} />}
-            <CompleteRequests allRequests={completedRequests} onExpandClick={handleRequestClick} />
+                <ExpandedRequest 
+                    expandedRequest = {expandedRequest} 
+                    onStateRequests = {handleStateRequests} 
+                    onExpandClick = {handleRequestClick} /> : 
+                <IncompleteRequests 
+                    allRequests={incompleteRequests} 
+                    onExpandClick={handleRequestClick} />}
+            <CompleteRequests 
+                allRequests={completedRequests} 
+                onExpandClick={handleRequestClick} />
         </div>
     )
 }
