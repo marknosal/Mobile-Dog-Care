@@ -57,10 +57,11 @@ class RequestsById(Resource):
         pass
 
     def patch(self, id):
-        requestPatch = Request.query.get_or_404(id)
+        
         data = request.get_json()
         
         try:
+            requestPatch = Request.query.get_or_404(id)
             for key, value in data.items():
                 if key == 'datetime':
                     datetime_obj = datetime.datetime.strptime(value, '%Y-%m-%dT%H:%M')
@@ -74,7 +75,7 @@ class RequestsById(Resource):
         except Exception as e:
             db.session.rollback()
 
-            return {'error': str(e)}, 500
+            return {'error': str(e)}, 5034
     
     def delete(self, id):
         deletedRequest = Request.query.filter_by(id=id).first()

@@ -46,6 +46,10 @@ class Request(db.Model, SerializerMixin):
     client = db.relationship('Client', back_populates='requests')
     pet = db.relationship('Pet', back_populates='requests')
 
+    def to_dict(self):
+        data = super().to_dict()
+        data['datetime'] = self.datetime.strftime('%Y-%m-%dT%H:%M')
+        return data
 
     def __repr__(self):
         return f'<Request {self.id}. Location: {self.location}. Price: {self.price}.>'
