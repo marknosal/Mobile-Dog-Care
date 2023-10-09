@@ -59,22 +59,22 @@ class RequestsById(Resource):
     def patch(self, id):
         requestPatch = Request.query.get_or_404(id)
         data = request.get_json()
-
-        for key, value in data.items():
-            setattr(requestPatch, key, value)
         
         try:
+            for key, value in data.items():
+                if key == 'datetime':
+                    datetime_obj = datetime.datetime.strptime(value, '%Y-%m-%dT%H:%M')
+                    setattr(requestPatch, key, datetime_obj)
+                else:
+                    setattr(requestPatch, key, value)
             db.session.commit()
+
             return requestPatch.to_dict(), 200
+        
         except Exception as e:
             db.session.rollback()
-            return {'error': str(e)}, 200
-        requestPatch.details = data['details']
-        requestPatch.location = data['location']
-        requestPatch.price = data['price']
-        db.session.add(requestPatch)
-        db.session.commit()
-        return requestPatch.to_dict(), 200
+            
+            return {'error': str(e)}, 500
     
     def delete(self, id):
         pass
