@@ -34,22 +34,29 @@ export default function Requests() {
         const updatedRequests = [...requests, newRequest]
         setRequests(updatedRequests)
     }
+    function handleCompleteRequest(updatedRequest) {
+        const updatedRequests = requests.map(r => 
+            r.id === updatedRequest.id ? updatedRequest : r
+        )
+        setRequests(updatedRequests)
+    }
 
     
     return (
         <div className="requests-main">
             {expandedRequestId ? 
                 <ExpandedRequest 
-                    expandedRequest = {expandedRequest} 
+                    expandedRequest = {expandedRequest}
+                    onCompleteRequest = {handleCompleteRequest} 
                     onEditRequest = {handleEditRequest} 
                     onExpandClick = {handleRequestClick} /> : 
                 <IncompleteRequests 
-                    incompleteRequests={incompleteRequests}
-                    onAddRequest={handleAddRequest}
-                    onExpandClick={handleRequestClick} />}
+                    incompleteRequests = {incompleteRequests}
+                    onAddRequest = {handleAddRequest}
+                    onExpandClick = {handleRequestClick} />}
             <CompleteRequests 
-                completedRequests={completedRequests} 
-                onExpandClick={handleRequestClick} />
+                completedRequests = {completedRequests} 
+                onExpandClick = {handleRequestClick} />
         </div>
     )
 }

@@ -57,8 +57,18 @@ class RequestsById(Resource):
         pass
 
     def patch(self, id):
-        requestPatch = Request.query.filter_by(id=id).first()
+        requestPatch = Request.query.get_or_404(id)
         data = request.get_json()
+
+        for key, value in data.items():
+            setattr(requestPatch, key, value)
+        
+        try:
+            db.session.commit()
+            return requestPatch.to_dict(), 200
+        except Exception as e:
+            db.session.rollback()
+            return {'error': str(e)}, 200
         requestPatch.details = data['details']
         requestPatch.location = data['location']
         requestPatch.price = data['price']

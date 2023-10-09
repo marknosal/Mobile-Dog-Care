@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
-export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEditRequest }) {
+export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEditRequest, onCompleteRequest }) {
     //state
     const [isEditMode, setIsEditMode] = useState(false);
 
@@ -128,6 +128,18 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEdi
             </form>
         );
     }
+    function handleCompleteButtonClick() {
+        fetch(`/requests/${expandedRequest.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ complete: true })
+        })
+            .then(response=>response.json())
+            .then(data=>onCompleteRequest(data))
+    }
 
     return (
         <div className="request-container" style={{position: 'relative'}}>
@@ -137,7 +149,7 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEdi
                 {isEditMode ? "Cancel" : "Edit"}
             </button>
             {isEditMode ? requestEditForm() : requestAllDetails()}
-            <button style={completeButtonStyle}>Complete Request</button>
+            <button style={completeButtonStyle} onClick={handleCompleteButtonClick}>Complete Request</button>
         </div>
     );
 }
