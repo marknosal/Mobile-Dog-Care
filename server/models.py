@@ -75,8 +75,8 @@ class Pet(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
-    age = db.Column(db.Integer)
-    species = db.Column(db.String)
+    age = db.Column(db.Integer, default='unknown')
+    species = db.Column(db.String, default='pet')
     notes = db.Column(db.String)
 
     client_id = db.Column(db.Integer, db.ForeignKey('clients.id'))

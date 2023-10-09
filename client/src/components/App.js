@@ -4,6 +4,8 @@ import Home from "./Home";
 import Requests from "./Requests";
 import Clients from "./Clients";
 import Pets from "./Pets";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -24,6 +26,7 @@ function App() {
           <Pets />
         </Route>
       </Switch>
+      <ToastContainer />
     </div>
   )
 }

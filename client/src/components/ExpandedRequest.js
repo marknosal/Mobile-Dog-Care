@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEditRequest, onCompleteRequest }) {
+export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEditRequest, onCompleteRequest, onDeleteRequest }) {
     //state
     const [isEditMode, setIsEditMode] = useState(false);
-
+    const history = useHistory();
     //styles
     const xButtonStyle = {
         position: 'absolute',
@@ -25,7 +28,11 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEdi
         left: 5,
         marginTop: '10px',
         display: isEditMode ? 'none' : 'block',
-    }
+    };
+
+    const deleteButtonStyle = {
+        marginTop: '5px',
+    };
 
     // Yup
     const forSchema = yup.object().shape({
@@ -39,6 +46,7 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEdi
         initialValues: {
             details: expandedRequest.details,
             location: expandedRequest.location,
+            datetime: expandedRequest.datetime,
             price: expandedRequest.price
         },
         validationSchema: forSchema,
@@ -114,6 +122,17 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEdi
                     <p>{formik.errors.location}</p>
                 </div>
                 <div>
+                    <label htmlFor="datetime">Date:</label>
+                    <input
+                        type="datetime-local"
+                        id="datetime"
+                        name="datetime"
+                        onChange={formik.handleChange}
+                        value={formik.values.datetime}
+                    />
+                    <p>{formik.errors.datetime}</p>
+                </div>
+                <div>
                     <label htmlFor="price">Price:</label>
                     <input
                         type="number"
@@ -141,6 +160,25 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEdi
             .then(data=>onCompleteRequest(data))
     }
 
+    function handleDeleteButtonClick() {
+        
+        fetch(`/request/${expandedRequest.id}`, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => {
+                if (response.ok) {
+                    onDeleteRequest(expandedRequest.id)
+                } else {
+                    history.push('/')
+                    toast.error('Error deleting request')
+                }
+            })
+    }
+
     return (
         <div className="request-container" style={{position: 'relative'}}>
             <h2>Request: {expandedRequest.id}</h2>
@@ -150,6 +188,7 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEdi
             </button>
             {isEditMode ? requestEditForm() : requestAllDetails()}
             <button style={completeButtonStyle} onClick={handleCompleteButtonClick}>Complete Request</button>
+            <button style={deleteButtonStyle} onClick={handleDeleteButtonClick}>Delete Request</button>
         </div>
     );
 }
