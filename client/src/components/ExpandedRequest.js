@@ -6,9 +6,10 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEditRequest, onCompleteRequest, onDeleteRequest }) {
+    const history = useHistory();
+
     //state
     const [isEditMode, setIsEditMode] = useState(false);
-    const history = useHistory();
     //styles
     const xButtonStyle = {
         position: 'absolute',
@@ -70,14 +71,17 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEdi
     }
 
     function requestAllDetails() {
+        const petName = expandedRequest.pet ? expandedRequest.pet.name : "N/A";
+        const petSpecies = expandedRequest.pet ? expandedRequest.pet.species : "N/A";
+        const details = expandedRequest.details ? expandedRequest.details : 'N/A';
         return (
             <div>
                 <div>
                     <h3>Request Details: </h3>
                     <ul>
-                        <li><strong>Pet name:</strong> {expandedRequest.client?.pets[0]?.name}</li>
-                        <li><strong>Species:</strong> {expandedRequest.client?.pets[0]?.species}</li>
-                        <li><strong>Instructions:</strong> {expandedRequest.details}</li>
+                        <li><strong>Pet name:</strong> {petName}</li>
+                        <li><strong>Species:</strong> {petSpecies}</li>
+                        <li><strong>Instructions:</strong> {details}</li>
                     </ul>
                 </div>
                 <div>

@@ -40,6 +40,11 @@ export default function Requests() {
         )
         setRequests(updatedRequests)
     }
+    function handleDeleteRequest(deletedId) {
+        setExpandedRequestId(null)
+        const updatedRequests = requests.filter(r => r.id !== deletedId)
+        setRequests(updatedRequests)
+    }
 
     
     return (
@@ -48,7 +53,8 @@ export default function Requests() {
                 <ExpandedRequest 
                     expandedRequest = {expandedRequest}
                     onCompleteRequest = {handleCompleteRequest} 
-                    onEditRequest = {handleEditRequest} 
+                    onEditRequest = {handleEditRequest}
+                    onDeleteRequest = {handleDeleteRequest} 
                     onExpandClick = {handleRequestClick} /> : 
                 <IncompleteRequests 
                     incompleteRequests = {incompleteRequests}
