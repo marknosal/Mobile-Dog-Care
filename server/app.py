@@ -73,11 +73,20 @@ class RequestsById(Resource):
         
         except Exception as e:
             db.session.rollback()
-            
+
             return {'error': str(e)}, 500
     
     def delete(self, id):
-        pass
+        deletedRequest = Request.query.filter_by(id=id).first()
+        try:
+            db.session.delete(deletedRequest)
+            db.session.commit()
+
+            return {'message': 'deletion successful'}, 200
+        except Exception as e:
+            db.session.rollback()
+
+            return {'error': str(e)}, 500
 
 api.add_resource(RequestsById, '/requests/<int:id>')
 

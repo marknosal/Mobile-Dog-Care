@@ -162,7 +162,7 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEdi
 
     function handleDeleteButtonClick() {
         
-        fetch(`/request/${expandedRequest.id}`, {
+        fetch(`/requests/${expandedRequest.id}`, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
