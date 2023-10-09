@@ -24,7 +24,7 @@ export default function IncompleteRequests({ incompleteRequests, onExpandClick, 
 
     return (
         <div className="request-container">
-            <h2>Incompleted Requests</h2>
+            <h2>{newRequest ? "New Request Form" : "Incompleted Requests"}</h2>
             <div>
                 <button 
                     style={{ margin: 10, display: newRequest ? 'none' : 'block'}} 
