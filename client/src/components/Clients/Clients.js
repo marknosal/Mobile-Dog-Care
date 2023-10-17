@@ -34,11 +34,11 @@ export default function Clients() {
     }
     return (
         <div className="clients-main">
+            <h2>Clients</h2>
             <Error error={error} />
             <div className="client-container">
                 {expandedClientId ? expandedClientContainer() : clientCardContainer()}
             </div>
-            Clients
         </div>
     )
 }

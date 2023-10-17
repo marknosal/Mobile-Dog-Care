@@ -11,9 +11,7 @@ export default function IncompleteRequests({ incompleteRequests, onExpandClick, 
         return (
             <div className="request-card-container">
                 {incompleteRequests.map(r => (
-                    <div key={r.id} className="request-card">
                         <RequestCard request={r} onExpandClick={onExpandClick} />
-                    </div>
                 ))}
             </div>
         )
