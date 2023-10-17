@@ -2,8 +2,8 @@ import { Switch, Route } from "react-router-dom";
 import NavBar from "./NavBar";
 import Home from "./Home";
 import Requests from "./Requests/Requests";
-import Clients from "./Clients";
-import Pets from "./Pets";
+import Clients from "./Clients/Clients";
+import Pets from "./Pets/Pets";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
