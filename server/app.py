@@ -101,7 +101,8 @@ api.add_resource(RequestsById, '/requests/<int:id>')
 
 class Clients(Resource):
     def get(self):
-        pass
+        clients_dict = [client.to_dict() for client in Client.query.all()]
+        return clients_dict, 200
     def post(self):
         pass
 
