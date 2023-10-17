@@ -93,6 +93,42 @@ class RequestsById(Resource):
 
 api.add_resource(RequestsById, '/requests/<int:id>')
 
+class Clients(Resource):
+    def get(self):
+        pass
+    def post(self):
+        pass
+
+api.add_resource(Clients, '/clients')
+
+class ClientsById(Resource):
+    def get(self, id):
+        pass
+    def patch(self, id):
+        pass
+    def delete(self, id):
+        pass
+
+api.add_resource(ClientsById, '/clients/<int:id>')
+
+class Pets(Resource):
+    def get(self):
+        pass
+    def post(self):
+        pass
+
+api.add_resource(Pets, '/pets')
+
+class PetsById(Resource):
+    def get(self, id):
+        pass
+    def patch(self, id):
+        pass
+    def delete(self, id):
+        pass
+
+api.add_resource(PetsById, '/pets/<int:id>')
+
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
