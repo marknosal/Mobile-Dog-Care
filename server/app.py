@@ -27,9 +27,9 @@ api.add_resource(Profile, '/profile')
 
 class Requests(Resource):
     def get(self):
-        response_to_dict = [n.to_dict() for n in Request.query.all()]
+        requests_to_dict = [n.to_dict() for n in Request.query.all()]
         # response = make_response(response_to_dict, 200)
-        return response_to_dict, 200
+        return requests_to_dict, 200
     
     def post(self):
         data = request.get_json()
@@ -101,8 +101,8 @@ api.add_resource(RequestsById, '/requests/<int:id>')
 
 class Clients(Resource):
     def get(self):
-        clients_dict = [client.to_dict() for client in Client.query.all()]
-        return clients_dict, 200
+        clients_to_dict = [client.to_dict() for client in Client.query.all()]
+        return clients_to_dict, 200
     def post(self):
         pass
 
@@ -120,7 +120,8 @@ api.add_resource(ClientsById, '/clients/<int:id>')
 
 class Pets(Resource):
     def get(self):
-        pass
+        pets_to_dict = [pet.to_dict() for pet in Pet.query.all()]
+        return pets_to_dict, 200
     def post(self):
         pass
 
