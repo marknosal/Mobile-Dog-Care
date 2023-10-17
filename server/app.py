@@ -27,13 +27,13 @@ class Requests(Resource):
     
     def post(self):
         data = request.get_json()
-        existing_client = Client.query.filter_by(name=data['client']).first()
-        datetime_obj = datetime.datetime.strptime(data['datetime'], '%Y-%m-%dT%H:%M')
-        if existing_client:
-            existing_pet = next((pet for pet in existing_client.pets if pet.name == data['pet']), None)
-        else:
-            existing_pet = None
         try:
+            existing_client = Client.query.filter_by(name=data['client']).first()
+            datetime_obj = datetime.datetime.strptime(data['datetime'], '%Y-%m-%dT%H:%M')
+            if existing_client:
+                existing_pet = next((pet for pet in existing_client.pets if pet.name == data['pet']), None)
+            else:
+                existing_pet = None
             requestClient = existing_client if existing_client else Client(name=data['client'])
             requestPet = existing_pet if existing_pet else Pet(name=data['pet'], client=requestClient)
             newRequest = Request(
@@ -49,6 +49,8 @@ class Requests(Resource):
             return newRequest.to_dict(), 201
         except IntegrityError:
             return {'error': 'IntegrityError'}, 400
+        except ValueError as error:
+            return {'error': str(error)}, 400
     
 api.add_resource(Requests, '/requests')
 

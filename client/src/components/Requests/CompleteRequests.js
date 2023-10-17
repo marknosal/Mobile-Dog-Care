@@ -1,6 +1,6 @@
 import React from "react";
 import RequestCard from './RequestCard';
-import '../index.css';
+import '../../index.css';
 
 export default function CompleteRequests({ completedRequests, onExpandClick }) {
     return (

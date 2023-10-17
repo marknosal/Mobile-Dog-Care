@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
-export default function NewRequestForm ({ onAddRequest, onNewRequestState }) {
+export default function NewRequestForm ({ onAddRequest, onNewRequestState, setError }) {
+
+    useEffect(() => {
+        return () => {
+            setError(null)
+        }
+    }, [])
 
     const forSchema = yup.object().shape({
         client: yup.string().required('Must exist').min(5),

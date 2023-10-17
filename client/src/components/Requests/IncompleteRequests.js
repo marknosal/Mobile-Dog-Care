@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import RequestCard from './RequestCard';
-import '../index.css';
+import '../../index.css';
 import NewRequestForm from "./NewRequestForm";
 
 
-export default function IncompleteRequests({ incompleteRequests, onExpandClick, onAddRequest }) {
+export default function IncompleteRequests({ incompleteRequests, onExpandClick, onAddRequest, setError }) {
     const [newRequest, setNewRequest] = useState(null)
 
     function requestCardContainer() {
@@ -37,6 +37,7 @@ export default function IncompleteRequests({ incompleteRequests, onExpandClick, 
                 <NewRequestForm 
                     onAddRequest={onAddRequest} 
                     onNewRequestState={handleNewRequestState} 
+                    setError={setError}
                 /> : requestCardContainer()}
         </div>
     )

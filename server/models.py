@@ -46,6 +46,26 @@ class Request(db.Model, SerializerMixin):
     client = db.relationship('Client', back_populates='requests')
     pet = db.relationship('Pet', back_populates='requests')
 
+    @validates('details')
+    def check_details(self, key, details):
+        if len(details) < 5:
+            raise ValueError(
+                {'message': 'Request details must be 5 characters or more.'}
+            )
+        return details
+
+    @validates('price')
+    def check_price(self, key, price):
+        if not price:
+            raise ValueError(
+                {'message': 'price must exist'}
+            )
+        if not isinstance(price, (int, float,)):
+            raise ValueError(
+                {'message': 'Price must be a number.'}
+            )
+        return price
+
     def to_dict(self):
         data = super().to_dict()
         data['datetime'] = self.datetime.strftime('%Y-%m-%dT%H:%M')
