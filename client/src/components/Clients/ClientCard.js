@@ -1,7 +1,9 @@
 import React from 'react'
 
-export default function ClientCard ({ client }) {
+export default function ClientCard ({ client, onExpandClick }) {
   return (
-    <div>ClientCard</div>
+    <div className='client-card' onClick={() => onExpandClick(client.id)}>
+        Client {client.id}
+    </div>
   )
 }

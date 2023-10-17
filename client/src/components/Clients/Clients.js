@@ -22,21 +22,19 @@ export default function Clients() {
         return (
             <div className="client-card-container">
                 {clients.map(client => (
-                    <div key={client.id} className="client-card">
-                        <ClientCard client={client} onExpandClick={handleExpandClick} />
-                    </div>
+                        <ClientCard key={client.id} client={client} onExpandClick={handleExpandClick} />
                 ))}
             </div>
         )
     }
-    function handleExpandClick() {
-        console.log('')
+    function handleExpandClick(id) {
+        setExpandedClientId(id)
     }
     return (
         <div className="clients-main">
-            <h2>Clients</h2>
             <Error error={error} />
             <div className="client-container">
+                <h2>{expandedClientId ? "Client" : "Clients"}</h2>
                 {expandedClientId ? expandedClientContainer() : clientCardContainer()}
             </div>
         </div>
