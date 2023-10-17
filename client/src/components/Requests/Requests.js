@@ -24,7 +24,7 @@ export default function Requests() {
 
     const expandedRequest = requests.find(r => r.id === expandedRequestId)
     //functions
-    function handleRequestClick (requestId) {
+    function handleExpandClick (requestId) {
         expandedRequestId ? setExpandedRequestId(null) : setExpandedRequestId(requestId)
     }
     function handleEditRequest(editedRequest) {
@@ -63,14 +63,14 @@ export default function Requests() {
                     onCompleteRequest = {handleCompleteRequest} 
                     onEditRequest = {handleEditRequest}
                     onDeleteRequest = {handleDeleteRequest}
-                    onExpandClick = {handleRequestClick} /> : 
+                    onExpandClick = {handleExpandClick} /> : 
                 <IncompleteRequests 
                     incompleteRequests = {incompleteRequests}
                     onAddRequest = {handleAddRequest}
-                    onExpandClick = {handleRequestClick} />}
+                    onExpandClick = {handleExpandClick} />}
             <CompleteRequests 
                 completedRequests = {completedRequests} 
-                onExpandClick = {handleRequestClick} />
+                onExpandClick = {handleExpandClick} />
         </div>
     )
 }

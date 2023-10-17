@@ -15,7 +15,9 @@ export default function Clients() {
     }, [])
 
     function expandedClientContainer () {
-        console.log('')
+        return (
+            <ExpandedClient onExpandClick={handleExpandClick} />
+        )
     }
 
     function clientCardContainer() {
@@ -28,7 +30,7 @@ export default function Clients() {
         )
     }
     function handleExpandClick(id) {
-        setExpandedClientId(id)
+        expandedClientId ? setExpandedClientId(null) : setExpandedClientId(id)
     }
     return (
         <div className="clients-main">
