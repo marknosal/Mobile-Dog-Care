@@ -19,6 +19,12 @@ from models import User, Request, Client, Pet
 def index():
     return '<h1>Project Server</h1>'
 
+class Profile(Resource):
+    def get(self):
+        pass
+
+api.add_resource(Profile, '/profile')
+
 class Requests(Resource):
     def get(self):
         response_to_dict = [n.to_dict() for n in Request.query.all()]
