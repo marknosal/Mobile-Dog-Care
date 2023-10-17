@@ -6,6 +6,7 @@ import Clients from "./Clients/Clients";
 import Pets from "./Pets/Pets";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import User from "./Users/User";
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
       <Switch>
         <Route exact path='/'>
           <Home />
+        </Route>
+        <Route exact path='/profile'>
+          <User />
         </Route>
         <Route exact path='/requests'>
           <Requests />

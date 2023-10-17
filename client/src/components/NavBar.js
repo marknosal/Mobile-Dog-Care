@@ -23,6 +23,9 @@ function NavBar() {
             <NavLink to='/' exact style={linkStyles} activeStyle={{ background: "pink", }}>
                 Home
             </NavLink>
+            <NavLink to='/profile' exact style={linkStyles} activeStyle={{ background: "pink", }}>
+                Profile
+            </NavLink>
             <NavLink to='/requests' exact style={linkStyles} activeStyle={{ background: "pink", }}>
                 Requests
             </NavLink>

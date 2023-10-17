@@ -22,8 +22,8 @@ def index():
 class Requests(Resource):
     def get(self):
         response_to_dict = [n.to_dict() for n in Request.query.all()]
-        response = make_response(response_to_dict, 200)
-        return response
+        # response = make_response(response_to_dict, 200)
+        return response_to_dict, 200
     
     def post(self):
         data = request.get_json()
