@@ -73,6 +73,7 @@ export default function Requests( { onUpdateClientDebt }) {
                 <IncompleteRequests 
                     incompleteRequests = {incompleteRequests}
                     onAddRequest = {handleAddRequest}
+                    setError={setError}
                     onExpandClick = {handleExpandClick} />}
             <CompleteRequests 
                 completedRequests = {completedRequests} 

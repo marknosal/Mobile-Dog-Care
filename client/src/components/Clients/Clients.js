@@ -50,7 +50,7 @@ export default function Clients({ clients, onSetClients }) {
                 >
                     Add New Client
                 </button>
-                {newClient ? <NewClientForm onShowNewClientForm={handleShowNewClientForm} /> : expandedClientId ? expandedClientContainer() : clientCardContainer()}
+                {newClient ? <NewClientForm onShowNewClientForm={handleShowNewClientForm} setError={setError} /> : expandedClientId ? expandedClientContainer() : clientCardContainer()}
             </div>
         </div>
     )
