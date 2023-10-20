@@ -12,6 +12,7 @@ import React, { useState } from "react";
 function App() {
   const [clients, setClients] = useState([])
   function handleUpdateClientDebt(updatedClient) {
+    console.log(updatedClient)
     const updatedClients = clients.map(c => c.id === updatedClient.id ? updatedClient : c)
     setClients(updatedClients)
   }

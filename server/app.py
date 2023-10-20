@@ -83,7 +83,7 @@ class RequestsById(Resource):
         except Exception as e:
             db.session.rollback()
 
-            return {'error': str(e)}, 5034
+            return {'error': str(e)}, 500
     
     def delete(self, id):
         deletedRequest = Request.query.filter_by(id=id).first()
@@ -112,7 +112,16 @@ class ClientsById(Resource):
     def get(self, id):
         pass
     def patch(self, id):
-        pass
+        data = request.get_json()
+        try:
+            clientPatch = Client.query.get_or_404(id)
+            for key, value in data.items():
+                setattr(clientPatch, key, value)
+            db.session.commit()
+            return clientPatch.to_dict(), 200
+        except Exception as e:
+            db.session.rollback()
+            return {'error': str(e)}, 500
     def delete(self, id):
         pass
 
