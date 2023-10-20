@@ -54,8 +54,10 @@ class Requests(Resource):
             db.session.commit()
             return newRequest.to_dict(), 201
         except IntegrityError:
+            db.session.rollback()
             return {'error': 'IntegrityError'}, 400
         except ValueError as error:
+            db.session.rollback()
             return {'error': str(error)}, 400
     
 api.add_resource(Requests, '/requests')
