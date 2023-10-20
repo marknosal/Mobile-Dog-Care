@@ -7,8 +7,14 @@ import Pets from "./Pets/Pets";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import User from "./Users/User";
+import React, { useState } from "react";
 
 function App() {
+  const [clients, setClients] = useState([])
+  function handleUpdateClientDebt(updatedClient) {
+    const updatedClients = clients.map(c => c.id === updatedClient.id ? updatedClient : c)
+    setClients(updatedClients)
+  }
   return (
     <div>
       <div className="centered-div-title">Mobile Dog Care</div>
@@ -21,10 +27,10 @@ function App() {
           <User />
         </Route>
         <Route exact path='/requests'>
-          <Requests />
+          <Requests onUpdateClientDebt={handleUpdateClientDebt} />
         </Route>
         <Route exact path='/clients'>
-          <Clients />
+          <Clients clients={clients} onSetClients={setClients} />
         </Route>
         <Route exact path='/pets'>
           <Pets />

@@ -5,7 +5,8 @@ import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEditRequest, onCompleteRequest, onDeleteRequest }) {
+
+export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEditRequest, onCompleteRequest, onDeleteRequest, onUpdateClientDebt }) {
     const history = useHistory();
 
     //state
@@ -169,6 +170,16 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEdi
         })
             .then(response=>response.json())
             .then(data=>onCompleteRequest(data))
+        fetch(`/clients/${expandedRequest.client_id}`, {
+            method: 'PATCH',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ debt: expandedRequest.client.debt + expandedRequest.price })
+        })
+            .then(response=>response.json())
+            .then(data=>onUpdateClientDebt(data))
     }
 
     function handleDeleteButtonClick() {

@@ -3,15 +3,15 @@ import Error from "../Error"
 import ClientCard from "./ClientCard"
 import ExpandedClient from "./ExpandedClient"
 
-export default function Clients() {
-    const [clients, setClients] = useState([])
+export default function Clients({ clients, onSetClients }) {
+
     const [expandedClientId, setExpandedClientId] = useState(null)
     const [error, setError] = useState(null)
 
     useEffect(() => {
         fetch('/clients',)
             .then(response=>response.json())
-            .then(data=>setClients(data))
+            .then(data=>onSetClients(data))
     }, [])
 
     function expandedClientContainer () {
