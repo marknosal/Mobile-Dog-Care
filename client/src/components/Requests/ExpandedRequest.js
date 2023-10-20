@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEditRequest, onCompleteRequest, onDeleteRequest, onUpdateClientDebt }) {
+export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEditRequest, onCompleteRequest, onDeleteRequest, onUpdateClientDebt, onClearExpandedRequest }) {
     const history = useHistory();
 
     //state
@@ -160,6 +160,7 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEdi
         );
     }
     function handleCompleteButtonClick() {
+        onClearExpandedRequest()
         fetch(`/requests/${expandedRequest.id}`, {
             method: 'PATCH',
             headers: {

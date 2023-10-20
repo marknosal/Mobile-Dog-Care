@@ -8,6 +8,8 @@ export default function Clients({ clients, onSetClients }) {
     const [expandedClientId, setExpandedClientId] = useState(null)
     const [error, setError] = useState(null)
 
+    const expandedClient = clients.find(c => c.id === expandedClientId)
+
     useEffect(() => {
         fetch('/clients',)
             .then(response=>response.json())
@@ -16,7 +18,7 @@ export default function Clients({ clients, onSetClients }) {
 
     function expandedClientContainer () {
         return (
-            <ExpandedClient onExpandClick={handleExpandClick} />
+            <ExpandedClient expandedClient={expandedClient} onExpandClick={handleExpandClick} />
         )
     }
 
@@ -36,7 +38,7 @@ export default function Clients({ clients, onSetClients }) {
         <div className="clients-main">
             <Error error={error} />
             <div className="client-container">
-                <h2>{expandedClientId ? "Client" : "Clients"}</h2>
+                <h2>{expandedClientId ? null : "Clients"}</h2>
                 {expandedClientId ? expandedClientContainer() : clientCardContainer()}
             </div>
         </div>

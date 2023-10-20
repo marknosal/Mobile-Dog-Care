@@ -53,6 +53,10 @@ export default function Requests( { onUpdateClientDebt }) {
         setRequests(updatedRequests)
     }
 
+    function handleClearExpandedRequest() {
+        setExpandedRequestId(null)
+    }
+
     
     return (
         <div className="requests-main">
@@ -64,6 +68,7 @@ export default function Requests( { onUpdateClientDebt }) {
                     onEditRequest = {handleEditRequest}
                     onDeleteRequest = {handleDeleteRequest}
                     onExpandClick = {handleExpandClick}
+                    onClearExpandedRequest = {handleClearExpandedRequest}
                     onUpdateClientDebt = {onUpdateClientDebt} /> : 
                 <IncompleteRequests 
                     incompleteRequests = {incompleteRequests}
