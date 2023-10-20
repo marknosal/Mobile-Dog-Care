@@ -4,7 +4,7 @@ import ClientCard from "./ClientCard"
 import ExpandedClient from "./ExpandedClient"
 import NewClientForm from "./NewClientForm"
 
-export default function Clients({ clients, onSetClients }) {
+export default function Clients({ clients, onSetClients, onAddClient }) {
 
     const [expandedClientId, setExpandedClientId] = useState(null)
     const [error, setError] = useState(null)
@@ -14,11 +14,11 @@ export default function Clients({ clients, onSetClients }) {
 
     useEffect(() => {
         fetch('/clients',)
-            .then(response=>response.json())
-            .then(data=>onSetClients(data))
+            .then(response => response.json())
+            .then(data => onSetClients(data))
     }, [])
 
-    function expandedClientContainer () {
+    function expandedClientContainer() {
         return (
             <ExpandedClient expandedClient={expandedClient} onExpandClick={handleExpandClick} />
         )
@@ -28,7 +28,7 @@ export default function Clients({ clients, onSetClients }) {
         return (
             <div className="client-card-container">
                 {clients.map(client => (
-                        <ClientCard key={client.id} client={client} onExpandClick={handleExpandClick} />
+                    <ClientCard key={client.id} client={client} onExpandClick={handleExpandClick} />
                 ))}
             </div>
         )
@@ -44,13 +44,21 @@ export default function Clients({ clients, onSetClients }) {
             <Error error={error} />
             <div className="client-container">
                 <h2>{expandedClientId ? null : "Clients"}</h2>
-                <button 
-                    onClick={()=>setNewClient(!newClient)}
-                    style={{ margin: 10, display: newClient ? 'none' : 'block'}} 
+                <button
+                    onClick={() => setNewClient(!newClient)}
+                    style={{ margin: 10, display: newClient ? 'none' : 'block' }}
                 >
                     Add New Client
                 </button>
-                {newClient ? <NewClientForm onShowNewClientForm={handleShowNewClientForm} setError={setError} /> : expandedClientId ? expandedClientContainer() : clientCardContainer()}
+                {newClient ? (
+                    <NewClientForm
+                        onShowNewClientForm={handleShowNewClientForm}
+                        setError={setError}
+                        onAddClient={onAddClient}
+                    />
+                ) : (
+                    expandedClientId ? expandedClientContainer() : clientCardContainer()
+                )}
             </div>
         </div>
     )

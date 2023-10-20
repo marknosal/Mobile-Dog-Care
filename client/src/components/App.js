@@ -16,10 +16,13 @@ function App() {
     const updatedClients = clients.map(c => c.id === updatedClient.id ? updatedClient : c)
     setClients(updatedClients)
   }
+  function handleAddClient(newClient) {
+    setClients([...clients, newClient])
+  }
   return (
     <div>
       <div className="centered-div-title">Mobile Dog Care</div>
-      <NavBar styles={{center: 'auto'}} />
+      <NavBar styles={{ center: 'auto' }} />
       <Switch>
         <Route exact path='/'>
           <Home />
@@ -28,10 +31,16 @@ function App() {
           <User />
         </Route>
         <Route exact path='/requests'>
-          <Requests onUpdateClientDebt={handleUpdateClientDebt} />
+          <Requests
+            onUpdateClientDebt={handleUpdateClientDebt}
+          />
         </Route>
         <Route exact path='/clients'>
-          <Clients clients={clients} onSetClients={setClients} />
+          <Clients
+            clients={clients}
+            onSetClients={setClients}
+            onAddClient={handleAddClient}
+          />
         </Route>
         <Route exact path='/pets'>
           <Pets />
