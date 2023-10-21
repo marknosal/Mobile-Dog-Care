@@ -43,10 +43,10 @@ export default function Clients({ clients, onSetClients, onAddClient }) {
         <div className="clients-main">
             <Error error={error} />
             <div className="client-container">
-                <h2>{expandedClientId ? null : "Clients"}</h2>
+                <h2>{expandedClientId || newClient ? null : "Clients"}</h2>
                 <button
                     onClick={() => setNewClient(!newClient)}
-                    style={{ margin: 10, display: newClient ? 'none' : 'block' }}
+                    style={{ margin: 10, display: newClient || expandedClientId ? 'none' : 'block' }}
                 >
                     Add New Client
                 </button>

@@ -40,6 +40,7 @@ export default function NewClientForm ({ onShowNewClientForm, setError, onAddCli
 
     return (
         <div className="new-client-form">
+            <h2>New Client Form</h2>
             <form onSubmit={formik.handleSubmit}>
                 <div>
                     <label htmlFor="name">Name:</label>
