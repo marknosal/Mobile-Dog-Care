@@ -61,6 +61,7 @@ if __name__ == '__main__':
                     name=fake.first_name(),
                     age=fake.random_int(min=0, max=200),
                     species=rc(available_species),
+                    notes=fake.sentence(),
                     client_id=client.id
                 )
                 client_pets.append(new_pet)
