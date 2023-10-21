@@ -80,7 +80,7 @@ class RequestsById(Resource):
                     setattr(requestPatch, key, value)
             db.session.commit()
 
-            return requestPatch.to_dict(), 200
+            return requestPatch.to_dict(), 202
         
         except Exception as e:
             db.session.rollback()
@@ -106,7 +106,21 @@ class Clients(Resource):
         clients_to_dict = [client.to_dict() for client in Client.query.all()]
         return clients_to_dict, 200
     def post(self):
-        pass
+        data = request.get_json()
+        try:
+            newClient = Client(
+                name=data['name'], 
+                address=data['address']
+            )
+            db.session.add(newClient)
+            db.session.commit()
+            return newClient.to_dict(), 201
+        except IntegrityError:
+            db.session.rollback()
+            return {'error': 'Integrity Error'}, 400
+        except ValueError as error:
+            db.session.rollback()
+            return {'error': str(error)}, 400
 
 api.add_resource(Clients, '/clients')
 
@@ -120,7 +134,7 @@ class ClientsById(Resource):
             for key, value in data.items():
                 setattr(clientPatch, key, value)
             db.session.commit()
-            return clientPatch.to_dict(), 200
+            return clientPatch.to_dict(), 202
         except Exception as e:
             db.session.rollback()
             return {'error': str(e)}, 500
