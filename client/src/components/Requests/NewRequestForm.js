@@ -56,7 +56,7 @@ export default function NewRequestForm ({ onAddRequest, onNewRequestState, setEr
         <div className="request-form-container">
             <form onSubmit={formik.handleSubmit}>
                 <div>
-                    <label htmlFor="client">Client:</label>
+                    <label htmlFor="client">Client: </label>
                     <input
                         type="text"
                         id="client"
@@ -67,7 +67,7 @@ export default function NewRequestForm ({ onAddRequest, onNewRequestState, setEr
                     <p>{formik.errors.client}</p>
                 </div>
                 <div>
-                    <label htmlFor="pet">Pet:</label>
+                    <label htmlFor="pet">Pet: </label>
                     <input
                         type='text'
                         id='pet'
@@ -78,7 +78,7 @@ export default function NewRequestForm ({ onAddRequest, onNewRequestState, setEr
                     <p>{formik.errors.pet}</p>
                 </div>
                 <div>
-                    <label htmlFor="details">Details:</label>
+                    <label htmlFor="details">Details: </label>
                     <input
                         type="text"
                         id="details"
@@ -89,7 +89,7 @@ export default function NewRequestForm ({ onAddRequest, onNewRequestState, setEr
                     <p>{formik.errors.details}</p>
                 </div>
                 <div>
-                    <label htmlFor="location">Location:</label>
+                    <label htmlFor="location">Location: </label>
                     <input
                         type="text"
                         id="location"
@@ -100,7 +100,7 @@ export default function NewRequestForm ({ onAddRequest, onNewRequestState, setEr
                     <p>{formik.errors.location}</p>
                 </div>
                 <div>
-                    <label htmlFor="price">Price:</label>
+                    <label htmlFor="price">Price: </label>
                     <input
                         type="number"
                         id="price"
@@ -111,7 +111,7 @@ export default function NewRequestForm ({ onAddRequest, onNewRequestState, setEr
                     <p>{formik.errors.price}</p>
                 </div>
                 <div>
-                    <label htmlFor="datetime">Date:</label>
+                    <label htmlFor="datetime">Date: </label>
                     <input
                         type="datetime-local"
                         id="datetime"

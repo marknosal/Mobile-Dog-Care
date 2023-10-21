@@ -42,7 +42,7 @@ export default function NewPetForm({ onShowNewPetForm, setError, onAddPet }) {
             <h2>New Pet Form</h2>
             <form onSubmit={formik.handleSubmit}>
                 <div>
-                    <label htmlFor="name">Name:</label>
+                    <label htmlFor="name">Name: </label>
                     <input
                         type='text'
                         id='name'
@@ -53,7 +53,7 @@ export default function NewPetForm({ onShowNewPetForm, setError, onAddPet }) {
                     <p>{formik.errors.name}</p>
                 </div>
                 <div>
-                    <label htmlFor="species">Species:</label>
+                    <label htmlFor="species">Species: </label>
                     <input 
                         type="text"
                         id="species"
@@ -64,7 +64,7 @@ export default function NewPetForm({ onShowNewPetForm, setError, onAddPet }) {
                     <p>{formik.errors.species}</p>
                 </div>
                 <div>
-                    <label htmlFor="age">Age:</label>
+                    <label htmlFor="age">Age: </label>
                     <input 
                         type="number"
                         id="age"
@@ -75,7 +75,7 @@ export default function NewPetForm({ onShowNewPetForm, setError, onAddPet }) {
                     <p>{formik.errors.age}</p>
                 </div>
                 <div>
-                    <label htmlFor="notes">Notes:</label>
+                    <label htmlFor="notes">Notes: </label>
                     <input
                         type="text"
                         id="notes"

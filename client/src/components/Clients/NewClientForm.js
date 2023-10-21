@@ -43,7 +43,7 @@ export default function NewClientForm ({ onShowNewClientForm, setError, onAddCli
             <h2>New Client Form</h2>
             <form onSubmit={formik.handleSubmit}>
                 <div>
-                    <label htmlFor="name">Name:</label>
+                    <label htmlFor="name">Name: </label>
                     <input
                         type="text"
                         id="name"
@@ -54,7 +54,7 @@ export default function NewClientForm ({ onShowNewClientForm, setError, onAddCli
                     <p>{formik.errors.name}</p>
                 </div>
                 <div>
-                    <label htmlFor="address">Address:</label>
+                    <label htmlFor="address">Address: </label>
                     <input
                         type="text"
                         id="address"
