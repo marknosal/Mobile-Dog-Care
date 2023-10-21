@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Formik, useFormik } from 'formik';
+import { useFormik } from 'formik';
 import * as yup from 'yup';
 
 export default function NewClientForm ({ onShowNewClientForm, setError, onAddClient }) {
@@ -64,7 +64,7 @@ export default function NewClientForm ({ onShowNewClientForm, setError, onAddCli
                     />
                     <p>{formik.errors.address}</p>
                     <button type="submit">Submit</button>
-                    <button onClick={()=> onShowNewClientForm()}>Cancel</button>
+                    <button onClick={onShowNewClientForm}>Cancel</button>
                 </div>
             </form>
             
