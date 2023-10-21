@@ -3,6 +3,7 @@ import Error from "../Error"
 import ClientCard from "./ClientCard"
 import ExpandedClient from "./ExpandedClient"
 import NewClientForm from "./NewClientForm"
+import "../../index.css"
 
 export default function Clients({ clients, onSetClients, onAddClient }) {
 
