@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import PetCard from "./PetCard"
+import "../../index.css"
 
 export default function Pets() {
     const [pets, setPets] = useState([])
