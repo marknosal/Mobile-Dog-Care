@@ -135,9 +135,9 @@ class ClientsById(Resource):
                 setattr(clientPatch, key, value)
             db.session.commit()
             return clientPatch.to_dict(), 202
-        except Exception as e:
+        except Exception as error:
             db.session.rollback()
-            return {'error': str(e)}, 500
+            return {'error': str(error)}, 500
     def delete(self, id):
         pass
 
@@ -148,7 +148,23 @@ class Pets(Resource):
         pets_to_dict = [pet.to_dict() for pet in Pet.query.all()]
         return pets_to_dict, 200
     def post(self):
-        pass
+        data = request.get_json()
+        try:
+            newPet = Pet(
+                name=data['name'],
+                species=data['species'],
+                age=data['age'],
+                notes=data['notes']
+            )
+            db.session.add(newPet)
+            db.session.commit()
+            return newPet.to_dict(), 201
+        except IntegrityError:
+            db.session.rollback()
+            return {'error': 'Integrity Error'}, 400
+        except ValueError as error:
+            db.session.rollback()
+            return {'error': str(error)}, 400
 
 api.add_resource(Pets, '/pets')
 

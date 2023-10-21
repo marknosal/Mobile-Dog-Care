@@ -31,7 +31,7 @@ export default function NewClientForm ({ onShowNewClientForm, setError, onAddCli
                 body: JSON.stringify(values)
             })
                 .then(response=>response.json())
-                .then(data => {
+                .then(data=>{
                     onAddClient(data)
                     onShowNewClientForm()
                 })

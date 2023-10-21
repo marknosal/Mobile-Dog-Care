@@ -13,7 +13,7 @@ export default function NewPetForm({ onShowNewPetForm, setError, onAddPet }) {
     const forSchema = yup.object().shape({
         name: yup.string().min(2).max(70).required('Must exist'),
         species: yup.string().min(2).max(50).required('Must exist'),
-        age: yup.number().min(1).max(3).required('Must exist'),
+        age: yup.number().min(0).max(150).required('Must exist'),
         notes: yup.string().min(1).max(1000)
     })
     const formik = useFormik({
@@ -34,7 +34,10 @@ export default function NewPetForm({ onShowNewPetForm, setError, onAddPet }) {
                 body: JSON.stringify(values)
             })
                 .then(response=>response.json())
-                .then(data=>onAddPet(data))
+                .then(data=>{
+                    onAddPet(data)
+                    onShowNewPetForm()
+                })
         }
     })
     return (
