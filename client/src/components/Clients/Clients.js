@@ -13,7 +13,7 @@ export default function Clients({ clients, onSetClients, onAddClient }) {
     const expandedClient = clients.find(c => c.id === expandedClientId)
 
     useEffect(() => {
-        fetch('/clients',)
+        fetch('/clients')
             .then(response => response.json())
             .then(data => onSetClients(data))
     }, [])

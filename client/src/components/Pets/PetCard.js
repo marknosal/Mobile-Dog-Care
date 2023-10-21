@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function PetCard() {
+export default function PetCard({ pet }) {
     return (
         <div className='petCard'>
-            Pet Card
+            Pet Card {pet.id}
         </div>
     )
 }
