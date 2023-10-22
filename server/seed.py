@@ -3,9 +3,11 @@
 # Standard library imports
 from random import randint, choice as rc
 from datetime import datetime, timedelta
+import string
 
 # Remote library imports
 from faker import Faker
+from config import bcrypt
 
 # Local imports
 from app import app
@@ -25,14 +27,24 @@ if __name__ == '__main__':
         print('Rows cleared...')
 
         # add user
+        
+        def generate_random_string():
+            characters = string.ascii_letters + string.digits
+            random_length = randint(8,50)
+            random_string = ''.join(rc(characters) for _ in range(random_length))
+            return random_string
+        
         users = []
-        new_user = User(
-            name=fake.name(),
-            age=fake.random_int(min=18, max=99),
-            email=fake.email(),
-            earnings=0.00,
-        )
-        users.append(new_user)
+        for i in range(5):
+            password=generate_random_string()
+            new_user = User(
+                name=fake.name(),
+                age=fake.random_int(min=18, max=99),
+                email=fake.email(),
+                earnings=0.00,
+                _password_hash=bcrypt.generate_password_hash(password.encode('utf-8')).decode('utf-8')
+            )
+            users.append(new_user)
         db.session.add_all(users)
         db.session.commit()
         print('User created...')
