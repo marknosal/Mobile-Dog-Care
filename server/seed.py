@@ -28,7 +28,7 @@ if __name__ == '__main__':
 
         # add user
         
-        def generate_random_string():
+        def generate_random_string(min, max):
             characters = string.ascii_letters + string.digits
             random_length = randint(8,50)
             random_string = ''.join(rc(characters) for _ in range(random_length))
@@ -36,12 +36,13 @@ if __name__ == '__main__':
         
         users = []
         for i in range(5):
-            password=generate_random_string()
+            password=generate_random_string(8, 50)
             new_user = User(
                 name=fake.name(),
                 age=fake.random_int(min=18, max=99),
                 email=fake.email(),
                 earnings=0.00,
+                username=generate_random_string(5, 20),
                 _password_hash=bcrypt.generate_password_hash(password.encode('utf-8')).decode('utf-8')
             )
             users.append(new_user)
