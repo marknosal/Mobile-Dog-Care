@@ -27,6 +27,9 @@ export default function LogInForm ({ onLogin }) {
                     if (response.ok) {
                         response.json()
                             .then(data => onLogin(data))
+                    } else {
+                        response.json()
+                            .then(data => setError(data))
                     }
                 })
         }
