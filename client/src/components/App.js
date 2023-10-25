@@ -7,9 +7,25 @@ import Pets from "./Pets/Pets";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import User from "./Users/User";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function App() {
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    fetch('/check_session')
+      .then(response => {
+        if (response.ok) {
+          response.json()
+            .then(data => setUser(data))
+        }
+      });
+  }, []);
+
+  if (!user) {
+    return <Login onLogin={setUser} />
+  }
+
   const [clients, setClients] = useState([])
   function handleUpdateClientDebt(updatedClient) {
     console.log(updatedClient)
