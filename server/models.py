@@ -18,6 +18,7 @@ class User(db.Model, SerializerMixin):
     age = db.Column(db.Integer)
     email = db.Column(db.String)
     earnings = db.Column(db.Float)
+    username = db.Column(db.String, unique=True)
     _password_hash = db.Column(db.String, nullable=False)
     # relationships
     requests = db.relationship('Request', back_populates='user')

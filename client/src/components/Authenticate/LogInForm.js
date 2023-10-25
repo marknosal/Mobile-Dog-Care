@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import * as yup from "yup";
 import { useFormik } from "formik";
+import Error from "../Error";
 
 export default function LogInForm ({ onLogin }) {
     const [error, setError] = useState(null)
