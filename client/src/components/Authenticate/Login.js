@@ -3,7 +3,7 @@ import SignUpForm from "./SignUpForm"
 import LogInForm from "./LogInForm"
 
 export default function Login({ onLogin }) {
-    const [showSignup, setShowSignup] = useState(false)
+    const [showSignUp, setShowSignUp] = useState(false)
     return (
         <>
             {showSignup ? (
@@ -12,8 +12,8 @@ export default function Login({ onLogin }) {
                     <hr />
                     <p>
                         Already have an account?
-                        <button onClick={() => setShowSignup(false)}>
-                            Login
+                        <button onClick={() => setShowSignUp(false)}>
+                            Log In
                         </button>
                     </p>
                 </>
@@ -23,7 +23,7 @@ export default function Login({ onLogin }) {
                     <hr />
                     <p>
                         Don't have an account?
-                        <button onClick={() => setShowSignup(true)}>
+                        <button onClick={() => setShowSignUp(true)}>
                             Signup!
                         </button>
                     </p>
