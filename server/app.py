@@ -31,8 +31,8 @@ def check_if_logged_in():
 
 class CheckSession(Resource):
     def get(self):
-        if session.get('user_id'):
-            user = User.query.filter_by(id=session['user_id']).first()
+        user = User.query.filter_by(id=session.get('user_id')).first()
+        if user:
             return user.to_dict(), 200
         return {}, 401
     
@@ -55,10 +55,8 @@ api.add_resource(Login, '/login', endpoint='login')
 
 class Logout(Resource):
     def delete(self):
-        if session.get('user_id'):
-            session['user_id'] = None
-            return {}, 204
-        return {'error': 'Unauthorized'}, 401
+        session['user_id'] = None
+        return {}, 204
 
 api.add_resource(Logout, '/logout', endpoint='logout')
 
