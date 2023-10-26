@@ -6,7 +6,7 @@ export default function Login({ onLogin }) {
     const [showSignUp, setShowSignUp] = useState(false)
     return (
         <>
-            {showSignup ? (
+            {showSignUp ? (
                 <>
                     <SignUpForm onLogin={onLogin} />
                     <hr />
