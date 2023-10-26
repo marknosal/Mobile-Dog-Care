@@ -174,7 +174,9 @@ api.add_resource(RequestsById, '/requests/<int:id>', endpoint='requests_by_id')
 
 class Clients(Resource):
     def get(self):
-        clients_to_dict = [client.to_dict() for client in Client.query.all()]
+        request_condition = Client.requests.any(user_id=session['user_id'])
+        clients = Client.query.filter(request_condition).all()
+        clients_to_dict = [client.to_dict() for client in clients]
         return clients_to_dict, 200
     def post(self):
         data = request.get_json()
