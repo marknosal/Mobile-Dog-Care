@@ -97,7 +97,10 @@ api.add_resource(Profile, '/profile', endpoint='profile')
 
 class Requests(Resource):
     def get(self):
-        requests = Request.query.filter_by(user_id=session['user_id']).all()
+        requests = Request.query.filter(
+            Request.user_id==session['user_id'],
+            Request.details.isnot(None)
+        ).all()
         requests_to_dict = [n.to_dict() for n in requests]
         return requests_to_dict, 200
     
