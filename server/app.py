@@ -118,6 +118,7 @@ class Requests(Resource):
                 details=data['details'],
                 location=data['location'],
                 price=data['price'],
+                user_id=session['user_id'],
                 datetime=datetime_obj
             )
             db.session.add(newRequest)
