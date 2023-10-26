@@ -53,9 +53,10 @@ export default function LogInForm ({ onLogin }) {
                 <div>
                     <label htmlFor="password">Password: </label>
                     <input
-                        type="text"
+                        type="password"
                         id="password"
                         name="password"
+                        autoComplete="current-password"
                         onChange={formik.handleChange}
                         value={formik.values.password}
                     />

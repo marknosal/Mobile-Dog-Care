@@ -8,7 +8,7 @@ export default function SignUpForm ({ onLogin }) {
     const forSchema = yup.object().shape({
         username: yup.string().min(5).required('Must exist'),
         name: yup.string().min(5).required('Must exist'),
-        age: yup.number().min(1).required('Must exist'),
+        age: yup.number().min(18).required('Must exist'),
         email: yup.string().min(5).required('Must exist'),
         password: yup.string().min(5).required('Must exist'),
         passwordConfirmation: yup.string()
@@ -82,6 +82,7 @@ export default function SignUpForm ({ onLogin }) {
                         onChange={formik.handleChange}
                         value={formik.values.age}
                     />
+                    <p>{formik.errors.age}</p>
                 </div>
                 <div>
                     <label htmlFor="email">Email: </label>
@@ -97,9 +98,10 @@ export default function SignUpForm ({ onLogin }) {
                 <div>
                     <label htmlFor="password">Password: </label>
                     <input
-                        type="text"
+                        type="password"
                         id="password"
                         name="password"
+                        autoComplete="new-password"
                         onChange={formik.handleChange}
                         value={formik.values.password}
                     />
@@ -108,9 +110,10 @@ export default function SignUpForm ({ onLogin }) {
                 <div>
                     <label htmlFor="passwordConfirmation">Confirm Password: </label>
                     <input
-                        type="text"
+                        type="password"
                         id="passwordConfirmation"
                         name="passwordConfirmation"
+                        autoComplete="new-password"
                         onChange={formik.handleChange}
                         value={formik.values.passwordConfirmation}
                     />

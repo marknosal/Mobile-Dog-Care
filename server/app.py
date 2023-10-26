@@ -97,8 +97,8 @@ api.add_resource(Profile, '/profile', endpoint='profile')
 
 class Requests(Resource):
     def get(self):
-        requests_to_dict = [n.to_dict() for n in Request.query.all()]
-        # response = make_response(response_to_dict, 200)
+        requests = Request.query.filter_by(user_id=session['user_id']).all()
+        requests_to_dict = [n.to_dict() for n in requests]
         return requests_to_dict, 200
     
     def post(self):
