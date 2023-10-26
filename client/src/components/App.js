@@ -17,7 +17,7 @@ export default function App() {
   useEffect(() => {
     fetch("/check_session").then((r) => {
       if (r.ok) {
-        r.json().then((data) => setUser(data));
+        r.json().then((data) => console.log(data));
       }
     });
   }, []);

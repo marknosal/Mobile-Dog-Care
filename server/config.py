@@ -1,4 +1,5 @@
 # Standard library imports
+import os
 
 # Remote library imports
 from flask import Flask
@@ -30,6 +31,7 @@ db = SQLAlchemy(metadata=metadata)
 migrate = Migrate(app, db)
 db.init_app(app)
 bcrypt = Bcrypt(app)
+app.secret_key = os.urandom(16)
 
 # Instantiate REST API
 api = Api(app)

@@ -30,8 +30,9 @@ api.add_resource(CheckSession, '/check_session')
 
 class Login(Resource):
     def post(self):
-        username = request.get_json()['username']
-        password = request.get_json()['password']
+        data = request.get_json()
+        username = data.get('username')
+        password = data.get('password')
         try:
             user = User.query.filter_by(username=username).first()
             if user.authenticate(password):
@@ -41,6 +42,32 @@ class Login(Resource):
             return {'error': str(e)}, 401
 
 api.add_resource(Login, '/login')
+
+class Signup(Resource):
+    def post(self):
+        data = request.get_json()
+        username = data.get('username')
+        name = data.get('name')
+        age = data.get('age')
+        email = data.get('email')
+        password = data.get('password')
+        new_user = User(
+            username=username,
+            name=name,
+            age=age,
+            email=email
+        )
+        new_user.password_hash = password
+        try:
+            db.session.add(new_user)
+            db.session.commit()
+            session['user_id'] = new_user.id
+            return new_user.to_dict(), 201
+        except Exception as e:
+            return {'error': str(e)}, 422
+        
+api.add_resource(Signup, '/signup')
+
 
 class Profile(Resource):
     def get(self):
