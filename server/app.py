@@ -43,6 +43,15 @@ class Login(Resource):
 
 api.add_resource(Login, '/login')
 
+class Logout(Resource):
+    def delete(self):
+        if session.get('user_id'):
+            session['user_id'] = None
+            return {}, 204
+        return {'error': 'Unauthorized'}, 401
+
+api.add_resource(Logout, '/logout')
+
 class Signup(Resource):
     def post(self):
         data = request.get_json()
