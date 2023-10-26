@@ -31,6 +31,9 @@ def check_if_logged_in():
 
 class CheckSession(Resource):
     def get(self):
+        # session_id = session.sid
+        # return session_id
+        print(session.get('user_id'))
         user = User.query.filter_by(id=session.get('user_id')).first()
         if user:
             return user.to_dict(), 200

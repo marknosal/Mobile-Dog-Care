@@ -17,14 +17,13 @@ export default function App() {
   useEffect(() => {
     fetch("/check_session").then((r) => {
       if (r.ok) {
-        r.json().then((data) => console.log(data));
+        r.json().then((data) => setUser(data));
       }
     });
   }, []);
 
 
     function handleUpdateClientDebt(updatedClient) {
-      console.log(updatedClient)
       const updatedClients = clients.map(c => c.id === updatedClient.id ? updatedClient : c)
       setClients(updatedClients)
     }
@@ -37,7 +36,6 @@ export default function App() {
 
     return (
       <div>
-        {console.log('mark')}
         <div className="centered-div-title">Mobile Dog Care</div>
         <NavBar styles={{ center: 'auto' }} />
         <Switch>
