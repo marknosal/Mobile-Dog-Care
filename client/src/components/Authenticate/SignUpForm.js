@@ -6,6 +6,7 @@ import Error from "../Error";
 export default function SignUpForm ({ onLogin }) {
     const [error, setError ] = useState(null)
     const forSchema = yup.object.shape({
+        username: yup.string().min(5).required('Must exist'),
         name: yup.string().min(5).required('Must exist'),
         age: yup.number().min(1).required('Must exist'),
         email: yup.string().min(5).required('Must exist'),
@@ -17,6 +18,7 @@ export default function SignUpForm ({ onLogin }) {
     })
     const formik = useFormik({
         initialValues: {
+            username: '',
             name: '',
             age: '',
             email: '',
@@ -50,9 +52,73 @@ export default function SignUpForm ({ onLogin }) {
             <h2>Signup Form</h2>
             <form onSubmit={formik.handleSubmit}>
                 <div>
-                    <label htmlFor=""
+                    <label htmlFor="username">Username: </label>
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        onChange={formik.handleChange}
+                        value={formik.values.username}
+                    />
+                    <p>{formik.errors.username}</p>
                 </div>
+                <div>
+                    <label htmlFor="name">Name: </label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        onChange={formik.handleChange}
+                        value={formik.values.name}
+                    />
+                    <p>{formik.errors.name}</p>
+                </div>
+                <div>
+                    <label htmlFor="age">Age: </label>
+                    <input
+                        type="number"
+                        id="age"
+                        name="age"
+                        onChange={formik.handleChange}
+                        value={formik.values.age}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="email">Email: </label>
+                    <input
+                        type="text"
+                        id="email"
+                        name="email"
+                        onChange={formik.handleChange}
+                        value={formik.values.email}
+                    />
+                    <p>{formik.errors.email}</p>
+                </div>
+                <div>
+                    <label htmlFor="password">Password: </label>
+                    <input
+                        type="text"
+                        id="password"
+                        name="password"
+                        onChange={formik.handleChange}
+                        value={formik.values.password}
+                    />
+                    <p>{formik.errors.password}</p>
+                </div>
+                <div>
+                    <label htmlFor="passwordConfirmation">Confirm Password: </label>
+                    <input
+                        type="text"
+                        id="passwordConfirmation"
+                        name="passwordConfirmation"
+                        onChange={formik.handleChange}
+                        value={formik.values.passwordConfirmation}
+                    />
+                    <p>{formik.errors.passwordConfirmation}</p>
+                </div>
+                <button type="submit">Sign Up</button>
             </form>
+            <Error error={error} />
         </div>
     )
 }

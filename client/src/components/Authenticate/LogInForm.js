@@ -40,7 +40,7 @@ export default function LogInForm ({ onLogin }) {
             <h2>Login Form</h2>
             <form onSubmit={formik.handleSubmit}>
                 <div>
-                    <label htmlFor="username">Username:</label>
+                    <label htmlFor="username">Username: </label>
                     <input
                         type='text'
                         id="username"
@@ -51,7 +51,7 @@ export default function LogInForm ({ onLogin }) {
                     <p>{formik.errors.username}</p>
                 </div>
                 <div>
-                    <label htmlFor="password">Password:</label>
+                    <label htmlFor="password">Password: </label>
                     <input
                         type="text"
                         id="password"
