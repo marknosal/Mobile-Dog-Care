@@ -3,7 +3,7 @@
 # Standard library imports
 
 # Remote library imports
-from flask import request, session
+from flask import request, session, abort
 from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
 import datetime
@@ -19,6 +19,16 @@ from models import User, Request, Client, Pet
 def index():
     return '<h1>Project Server</h1>'
 
+@app.before_request
+def check_if_logged_in():
+    open_access_list = [
+        'signup',
+        'login',
+        'check_session'
+    ]
+    if request.endpoint not in open_access_list and not session.get('user_id'):
+        abort(401, error='Unauthorized')
+
 class CheckSession(Resource):
     def get(self):
         if session.get('user_id'):
@@ -26,7 +36,7 @@ class CheckSession(Resource):
             return user.to_dict(), 200
         return {}, 401
     
-api.add_resource(CheckSession, '/check_session')
+api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 
 class Login(Resource):
     def post(self):
@@ -41,7 +51,7 @@ class Login(Resource):
         except Exception as e:
             return {'error': str(e)}, 401
 
-api.add_resource(Login, '/login')
+api.add_resource(Login, '/login', endpoint='login')
 
 class Logout(Resource):
     def delete(self):
@@ -50,7 +60,7 @@ class Logout(Resource):
             return {}, 204
         return {'error': 'Unauthorized'}, 401
 
-api.add_resource(Logout, '/logout')
+api.add_resource(Logout, '/logout', endpoint='logout')
 
 class Signup(Resource):
     def post(self):
@@ -75,14 +85,14 @@ class Signup(Resource):
         except Exception as e:
             return {'error': str(e)}, 422
         
-api.add_resource(Signup, '/signup')
+api.add_resource(Signup, '/signup', endpoint='signup')
 
 
 class Profile(Resource):
     def get(self):
         pass
 
-api.add_resource(Profile, '/profile')
+api.add_resource(Profile, '/profile', endpoint='profile')
 
 class Requests(Resource):
     def get(self):
@@ -119,7 +129,7 @@ class Requests(Resource):
             db.session.rollback()
             return {'error': str(error)}, 400
     
-api.add_resource(Requests, '/requests')
+api.add_resource(Requests, '/requests', endpoint='requests')
 
 class RequestsById(Resource):
     def get(self, id):
@@ -158,7 +168,7 @@ class RequestsById(Resource):
 
             return {'error': str(e)}, 500
 
-api.add_resource(RequestsById, '/requests/<int:id>')
+api.add_resource(RequestsById, '/requests/<int:id>', endpoint='requests_by_id')
 
 class Clients(Resource):
     def get(self):
@@ -181,7 +191,7 @@ class Clients(Resource):
             db.session.rollback()
             return {'error': str(error)}, 400
 
-api.add_resource(Clients, '/clients')
+api.add_resource(Clients, '/clients', endpoint='clients')
 
 class ClientsById(Resource):
     def get(self, id):
@@ -200,7 +210,7 @@ class ClientsById(Resource):
     def delete(self, id):
         pass
 
-api.add_resource(ClientsById, '/clients/<int:id>')
+api.add_resource(ClientsById, '/clients/<int:id>', endpoint='clients_by_id')
 
 class Pets(Resource):
     def get(self):
@@ -225,7 +235,7 @@ class Pets(Resource):
             db.session.rollback()
             return {'error': str(error)}, 400
 
-api.add_resource(Pets, '/pets')
+api.add_resource(Pets, '/pets', endpoint='pets')
 
 class PetsById(Resource):
     def get(self, id):
@@ -235,7 +245,7 @@ class PetsById(Resource):
     def delete(self, id):
         pass
 
-api.add_resource(PetsById, '/pets/<int:id>')
+api.add_resource(PetsById, '/pets/<int:id>', endpoint='pets_by_id')
 
 
 if __name__ == '__main__':
