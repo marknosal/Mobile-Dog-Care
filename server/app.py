@@ -19,6 +19,14 @@ from models import User, Request, Client, Pet
 def index():
     return '<h1>Project Server</h1>'
 
+class CheckSession(Resource):
+    def get(self):
+        if session.get('user_id'):
+            user = User.query.filter_by(id=session['user_id']).first()
+            return user.to_dict(), 200
+        return {}, 401
+    
+api.add_resource(CheckSession, '/check_session')
 
 class Login(Resource):
     def post(self):

@@ -5,7 +5,7 @@ import Error from "../Error";
 
 export default function LogInForm ({ onLogin }) {
     const [error, setError] = useState(null)
-    const forSchema = yup.object.shape({
+    const forSchema = yup.object().shape({
         username: yup.string().min(5).required('Must exist'),
         password: yup.string().min(5).required('Must exist')
     })

@@ -5,9 +5,9 @@ import LogInForm from "./LogInForm"
 export default function Login({ onLogin }) {
     const [showSignUp, setShowSignUp] = useState(false)
     return (
-        <>
+        <div>
             {showSignUp ? (
-                <>
+                <div>
                     <SignUpForm onLogin={onLogin} />
                     <hr />
                     <p>
@@ -16,9 +16,9 @@ export default function Login({ onLogin }) {
                             Log In
                         </button>
                     </p>
-                </>
+                </div>
             ) : (
-                <>
+                <div>
                     <LogInForm onLogin={onLogin} />
                     <hr />
                     <p>
@@ -27,8 +27,8 @@ export default function Login({ onLogin }) {
                             Signup!
                         </button>
                     </p>
-                </>
+                </div>
             )}
-        </>
+        </div>
     )
 }
