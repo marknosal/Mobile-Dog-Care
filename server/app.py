@@ -186,6 +186,8 @@ class Clients(Resource):
                 address=data['address']
             )
             db.session.add(newClient)
+            current_user = User.query.get(session['user_id'])
+            current_user.clients.append(newClient)
             db.session.commit()
             return newClient.to_dict(), 201
         except IntegrityError:
@@ -218,7 +220,9 @@ api.add_resource(ClientsById, '/clients/<int:id>', endpoint='clients_by_id')
 
 class Pets(Resource):
     def get(self):
-        pets_to_dict = [pet.to_dict() for pet in Pet.query.all()]
+        request_condition = Pet.requests.any(user_id=session['user_id'])
+        pets = Pet.query.filter(request_condition).all()
+        pets_to_dict = [pet.to_dict() for pet in pets]
         return pets_to_dict, 200
     def post(self):
         data = request.get_json()
@@ -230,6 +234,7 @@ class Pets(Resource):
                 notes=data['notes']
             )
             db.session.add(newPet)
+
             db.session.commit()
             return newPet.to_dict(), 201
         except IntegrityError:

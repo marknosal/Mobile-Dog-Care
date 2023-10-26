@@ -5,6 +5,7 @@ export default function ExpandedPet({ expandedPet, onExpandPet }) {
         <div className="expanded-pet" style={{ position: 'relative'}}>
             <h2>Pet: {expandedPet.id}</h2>
             <h2>Name: {expandedPet.name}</h2>
+            {expandedPet.client ? <h2>Owner: {expandedPet.client.name}</h2> : null}
             <h2>Species: {expandedPet.species}</h2>
             <h2>Age: {expandedPet.age}</h2>
             <h2>Notes: </h2>

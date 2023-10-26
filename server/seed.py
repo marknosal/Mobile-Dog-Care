@@ -35,6 +35,16 @@ if __name__ == '__main__':
             return random_string
         
         users = []
+        user_admin = User(
+            name='admin',
+            age=99,
+            email='admin@fake.com',
+            earnings=0.00,
+            username='admin'
+        )
+        user_admin.password_hash = 'admin'
+        users.append(user_admin)
+        db.session.add(user_admin)
         for i in range(5):
             password=generate_random_string(8, 50)
             new_user = User(
