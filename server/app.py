@@ -27,7 +27,7 @@ def check_if_logged_in():
         'check_session'
     ]
     if request.endpoint not in open_access_list and not session.get('user_id'):
-        abort(401, error='Unauthorized')
+        abort(401, 'Unauthorized')
 
 class CheckSession(Resource):
     def get(self):
