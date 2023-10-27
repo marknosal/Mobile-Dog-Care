@@ -43,7 +43,7 @@ export default function App() {
             <Home />
           </Route>
           <Route exact path='/profile'>
-            <User user={user} />
+            <User user={user} onLogout={setUser} />
           </Route>
           <Route exact path='/requests'>
             <Requests

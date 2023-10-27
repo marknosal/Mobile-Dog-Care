@@ -203,7 +203,7 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEdi
     }
 
     return (
-        <div className="request-container" style={{position: 'relative'}}>
+        <div className="request-container" style={{ position: 'relative' }}>
             <h2>Request: {expandedRequest.id}</h2>
             <button onClick={onExpandClick} style={xButtonStyle}>X</button>
             <button onClick={handleEditClick} style={editButtonStyle}>
