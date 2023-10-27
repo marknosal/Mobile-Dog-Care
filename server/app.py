@@ -189,8 +189,8 @@ class Clients(Resource):
                 address=data['address']
             )
             db.session.add(newClient)
-            current_user = User.query.get(session['user_id'])
-            current_user.clients.append(newClient)
+            # current_user = User.query.filter(User.id==session['user_id']).first()
+            # current_user.clients.append(newClient)
             db.session.commit()
             return newClient.to_dict(), 201
         except IntegrityError:
@@ -237,7 +237,8 @@ class Pets(Resource):
                 notes=data['notes']
             )
             db.session.add(newPet)
-
+            # current_user = User.query.filter(User.id==session['user_id']).first()
+            
             db.session.commit()
             return newPet.to_dict(), 201
         except IntegrityError:
