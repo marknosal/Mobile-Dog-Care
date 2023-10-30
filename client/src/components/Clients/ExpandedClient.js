@@ -2,20 +2,47 @@ import React from 'react';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 
-export default function ExpandedClient ({ expandedClient, onExpandClick }) {
-  
+export default function ExpandedClient({ expandedClient, onExpandClick }) {
+
+  const forSchema = yup.object().shape({
+    amountToCollect: yup.number().min(1).required('Must exist'),
+  })
+  const formik = useFormik({
+    initialValues: {
+      payment: expandedClient.debt,
+    },
+    validationSchema: forSchema,
+    onSubmit: (values) => {
+
+    }
+  })
+
   return (
     <div style={{ position: 'relative' }}>
-        <h2>Client: {expandedClient.id}</h2>
-        <h2>Name: {expandedClient.name}</h2>
-        <h2>Address: {expandedClient.address}</h2>
-        <h2>Debt: {expandedClient.debt}</h2>
-        {expandedClient.debt !== 0 && (
-          <button>
-            Settle Debt
-          </button>
-        )}
-        <button style={{ position: 'absolute', top: '0px', right: '0px' }} onClick={onExpandClick}>X</button>
+      <h2>Client: {expandedClient.id}</h2>
+      <h2>Name: {expandedClient.name}</h2>
+      <h2>Address: {expandedClient.address}</h2>
+      <h2>Debt: {expandedClient.debt}</h2>
+
+      {expandedClient.debt !== 0 && (
+        <div>
+          <form onSubmit={formik.handleSubmit}>
+            <div>
+              <label htmlFor='amountToCollect'>Payment: </label>
+              <input
+                type='number'
+                id='payment'
+                name='payment'
+                onChange={formik.handleChange}
+                value={formik.values.payment}
+              />
+              <p>{formik.errors.payment}</p>
+            </div>
+            <button type='submit'>Collect Paymentt</button>
+          </form>
+        </div>
+      )}
+      <button style={{ position: 'absolute', top: '0px', right: '0px' }} onClick={onExpandClick}>X</button>
     </div>
   )
 }
