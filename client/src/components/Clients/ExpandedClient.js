@@ -2,7 +2,7 @@ import React from 'react';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 
-export default function ExpandedClient({ expandedClient, onExpandClick, onUpdateClient }) {
+export default function ExpandedClient({ expandedClient, onExpandClick, onUpdateClient, user, onUpdateUser }) {
 
   const forSchema = yup.object().shape({
     amountToCollect: yup.number().min(1).required('Must exist'),
@@ -14,22 +14,32 @@ export default function ExpandedClient({ expandedClient, onExpandClick, onUpdate
     validationSchema: forSchema,
     onSubmit: (values) => {
       const newDebt = expandedClient.debt - formik.values.payment
-      fetch(`/clients/${expandedClient.id}`, {
-        method: 'PATCH',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ debt: newDebt })
-      })
-      .then(response => response.json())
-      .then(data => {
-        onUpdateClient(data)
-        onExpandClick()
-      })
+      Promise.all([
+        fetch(`/clients/${expandedClient.id}`, {
+          method: 'PATCH',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ debt: newDebt }),
+        }).then(response => response.json()),
+        fetch(`/users/${user.id}`, {
+          method: 'PATCH',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ earnings: user.earnings + formik.values.payment }),
+        }).then(response => response.json()),
+      ])
+        .then(([clientData, userData]) => {
+          onUpdateClient(clientData);
+          onUpdateUser(userData);
+          onExpandClick();
+        })
     }
   })
-
+  
   return (
     <div style={{ position: 'relative' }}>
       <h2>Client: {expandedClient.id}</h2>

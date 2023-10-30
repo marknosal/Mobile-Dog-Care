@@ -5,7 +5,14 @@ import ExpandedClient from "./ExpandedClient"
 import NewClientForm from "./NewClientForm"
 import "../../index.css"
 
-export default function Clients({ clients, onSetClients, onAddClient, onUpdateClient }) {
+export default function Clients({ 
+    clients, 
+    onSetClients, 
+    onAddClient, 
+    onUpdateClient, 
+    onUpdateUser,
+    user
+}) {
 
     const [expandedClientId, setExpandedClientId] = useState(null)
     const [error, setError] = useState(null)
@@ -31,7 +38,9 @@ export default function Clients({ clients, onSetClients, onAddClient, onUpdateCl
             <ExpandedClient
                 onUpdateClient={onUpdateClient}
                 expandedClient={expandedClient} 
+                onUpdateUser={onUpdateUser}
                 onExpandClick={handleExpandClick} 
+                user={user}
             />
         )
     }

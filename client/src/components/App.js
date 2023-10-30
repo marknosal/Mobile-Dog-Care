@@ -22,47 +22,52 @@ export default function App() {
     });
   }, []);
 
-
-    function handleUpdateClient(updatedClient) {
-      const updatedClients = clients.map(c => c.id === updatedClient.id ? updatedClient : c)
-      setClients(updatedClients)
-    }
-
-    function handleAddClient(newClient) {
-      setClients([...clients, newClient])
-    }
-
-    if (!user) return <Login onLogin={setUser} />;
-
-    return (
-      <div>
-        <div className="centered-div-title">Mobile Dog Care</div>
-        <NavBar styles={{ center: 'auto' }} />
-        <Switch>
-          <Route exact path='/'>
-            <Home />
-          </Route>
-          <Route exact path='/profile'>
-            <User user={user} onLogout={setUser} />
-          </Route>
-          <Route exact path='/requests'>
-            <Requests
-              onUpdateClient={handleUpdateClient}
-            />
-          </Route>
-          <Route exact path='/clients'>
-            <Clients
-              clients={clients}
-              onSetClients={setClients}
-              onAddClient={handleAddClient}
-              onUpdateClient={handleUpdateClient}
-            />
-          </Route>
-          <Route exact path='/pets'>
-            <Pets />
-          </Route>
-        </Switch>
-        <ToastContainer />
-      </div>
-    )
+  function handleUpdateUser(updatedUser) {
+    setUser(updatedUser)
   }
+
+  function handleUpdateClient(updatedClient) {
+    const updatedClients = clients.map(c => c.id === updatedClient.id ? updatedClient : c)
+    setClients(updatedClients)
+  }
+
+  function handleAddClient(newClient) {
+    setClients([...clients, newClient])
+  }
+
+  if (!user) return <Login onLogin={setUser} />;
+
+  return (
+    <div>
+      <div className="centered-div-title">Mobile Dog Care</div>
+      <NavBar styles={{ center: 'auto' }} />
+      <Switch>
+        <Route exact path='/'>
+          <Home />
+        </Route>
+        <Route exact path='/profile'>
+          <User user={user} onLogout={setUser} />
+        </Route>
+        <Route exact path='/requests'>
+          <Requests
+            onUpdateClient={handleUpdateClient}
+          />
+        </Route>
+        <Route exact path='/clients'>
+          <Clients
+            clients={clients}
+            onSetClients={setClients}
+            onAddClient={handleAddClient}
+            onUpdateClient={handleUpdateClient}
+            onUpdateUser={handleUpdateUser}
+            user={user}
+          />
+        </Route>
+        <Route exact path='/pets'>
+          <Pets />
+        </Route>
+      </Switch>
+      <ToastContainer />
+    </div>
+  )
+}
