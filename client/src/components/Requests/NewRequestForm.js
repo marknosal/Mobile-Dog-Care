@@ -44,6 +44,7 @@ export default function NewRequestForm ({ onAddRequest, onNewRequestState, setEr
                     onNewRequestState()
                 }
             )
+            .catch(error => setError(error))
         }
     })
 

@@ -1,6 +1,9 @@
-import React from 'react'
+import React from 'react';
+import * as yup from 'yup';
+import { useFormik } from 'formik';
 
 export default function ExpandedClient ({ expandedClient, onExpandClick }) {
+  
   return (
     <div style={{ position: 'relative' }}>
         <h2>Client: {expandedClient.id}</h2>
