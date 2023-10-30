@@ -144,17 +144,19 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEdi
                     />
                     <p>{formik.errors.datetime}</p>
                 </div>
-                <div>
-                    <label htmlFor="price">Price:</label>
-                    <input
-                        type="number"
-                        id="price"
-                        name="price"
-                        onChange={formik.handleChange}
-                        value={formik.values.price}
-                    />
-                    <p>{formik.errors.price}</p>
-                </div>
+                {!expandedRequest.complete && (
+                    <div>
+                        <label htmlFor="price">Price:</label>
+                        <input
+                            type="number"
+                            id="price"
+                            name="price"
+                            onChange={formik.handleChange}
+                            value={formik.values.price}
+                        />
+                        <p>{formik.errors.price}</p>
+                    </div>
+                )}
                 <button type="submit">Save</button>
             </form>
         );
@@ -210,8 +212,14 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEdi
                 {isEditMode ? "Cancel" : "Edit"}
             </button>
             {isEditMode ? requestEditForm() : requestAllDetails()}
-            <button style={completeButtonStyle} onClick={handleCompleteButtonClick}>Complete Request</button>
-            <button style={deleteButtonStyle} onClick={handleDeleteButtonClick}>Delete Request</button>
+            {!expandedRequest.complete && (
+                <button style={completeButtonStyle} onClick={handleCompleteButtonClick}>
+                    Complete Request
+                </button>
+            )}
+            <button style={deleteButtonStyle} onClick={handleDeleteButtonClick}>
+                Delete Request
+            </button>
         </div>
     );
 }
