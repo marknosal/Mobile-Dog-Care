@@ -38,12 +38,11 @@ export default function NewRequestForm ({ onAddRequest, onNewRequestState, setEr
                 },
                 body: JSON.stringify(values)
             })
-            .then(response=>response.json())
-            .then(data=> {
+            .then(response => response.json())
+            .then(data => {
                     onAddRequest(data)
                     onNewRequestState()
-                }
-            )
+                })
             .catch(error => setError(error))
         }
     })

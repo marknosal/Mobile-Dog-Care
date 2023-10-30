@@ -5,7 +5,7 @@ import ExpandedClient from "./ExpandedClient"
 import NewClientForm from "./NewClientForm"
 import "../../index.css"
 
-export default function Clients({ clients, onSetClients, onAddClient }) {
+export default function Clients({ clients, onSetClients, onAddClient, onUpdateClient }) {
 
     const [expandedClientId, setExpandedClientId] = useState(null)
     const [error, setError] = useState(null)
@@ -19,9 +19,20 @@ export default function Clients({ clients, onSetClients, onAddClient }) {
             .then(data => onSetClients(data))
     }, [])
 
+    // function handleUpdateClient(updatedClient) {
+    //     const updatedClients = clients.map(c => {
+    //         return c.id === updatedClient.id ? updatedClient : c
+    //     })
+    //     onSetClients(updatedClients)
+    // }
+
     function expandedClientContainer() {
         return (
-            <ExpandedClient expandedClient={expandedClient} onExpandClick={handleExpandClick} />
+            <ExpandedClient
+                onUpdateClient={onUpdateClient}
+                expandedClient={expandedClient} 
+                onExpandClick={handleExpandClick} 
+            />
         )
     }
 

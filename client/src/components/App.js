@@ -23,7 +23,7 @@ export default function App() {
   }, []);
 
 
-    function handleUpdateClientDebt(updatedClient) {
+    function handleUpdateClient(updatedClient) {
       const updatedClients = clients.map(c => c.id === updatedClient.id ? updatedClient : c)
       setClients(updatedClients)
     }
@@ -47,7 +47,7 @@ export default function App() {
           </Route>
           <Route exact path='/requests'>
             <Requests
-              onUpdateClientDebt={handleUpdateClientDebt}
+              onUpdateClient={handleUpdateClient}
             />
           </Route>
           <Route exact path='/clients'>
@@ -55,6 +55,7 @@ export default function App() {
               clients={clients}
               onSetClients={setClients}
               onAddClient={handleAddClient}
+              onUpdateClient={handleUpdateClient}
             />
           </Route>
           <Route exact path='/pets'>

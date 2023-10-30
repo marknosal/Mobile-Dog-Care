@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEditRequest, onCompleteRequest, onDeleteRequest, onUpdateClientDebt, onClearExpandedRequest }) {
+export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEditRequest, onCompleteRequest, onDeleteRequest, onUpdateClient, onClearExpandedRequest }) {
     const history = useHistory();
 
     //state
@@ -182,7 +182,7 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEdi
             body: JSON.stringify({ debt: expandedRequest.client.debt + expandedRequest.price })
         })
             .then(response=>response.json())
-            .then(data=>onUpdateClientDebt(data))
+            .then(data=>onUpdateClient(data))
     }
 
     function handleDeleteButtonClick() {

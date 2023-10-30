@@ -2,7 +2,7 @@ import React from 'react';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 
-export default function ExpandedClient({ expandedClient, onExpandClick }) {
+export default function ExpandedClient({ expandedClient, onExpandClick, onUpdateClient }) {
 
   const forSchema = yup.object().shape({
     amountToCollect: yup.number().min(1).required('Must exist'),
@@ -13,7 +13,20 @@ export default function ExpandedClient({ expandedClient, onExpandClick }) {
     },
     validationSchema: forSchema,
     onSubmit: (values) => {
-
+      const newDebt = expandedClient.debt - formik.values.payment
+      fetch(`/clients/${expandedClient.id}`, {
+        method: 'PATCH',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ debt: newDebt })
+      })
+      .then(response => response.json())
+      .then(data => {
+        onUpdateClient(data)
+        onExpandClick()
+      })
     }
   })
 
@@ -38,7 +51,7 @@ export default function ExpandedClient({ expandedClient, onExpandClick }) {
               />
               <p>{formik.errors.payment}</p>
             </div>
-            <button type='submit'>Collect Paymentt</button>
+            <button type='submit'>Collect Payment</button>
           </form>
         </div>
       )}
