@@ -26,13 +26,6 @@ export default function Clients({
             .then(data => onSetClients(data))
     }, [])
 
-    // function handleUpdateClient(updatedClient) {
-    //     const updatedClients = clients.map(c => {
-    //         return c.id === updatedClient.id ? updatedClient : c
-    //     })
-    //     onSetClients(updatedClients)
-    // }
-
     function expandedClientContainer() {
         return (
             <ExpandedClient

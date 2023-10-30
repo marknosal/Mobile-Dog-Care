@@ -1,18 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 
-export default function ExpandedClient({ expandedClient, onExpandClick, onUpdateClient, user, onUpdateUser, setError }) {
+export default function ExpandedClient({ 
+  expandedClient, 
+  onExpandClick, 
+  onUpdateClient, 
+  user, 
+  onUpdateUser, 
+  setError }) {
+
+  useEffect(() => {
+    return () => {
+      setError(null)
+    }
+  }, [])
 
   const forSchema = yup.object().shape({
-    amountToCollect: yup.number().min(1).required('Must exist'),
+    payment: yup.number().min(1).required('Must exist'),
   })
   const formik = useFormik({
     initialValues: {
-      payment: expandedClient.debt,
+      payment: expandedClient.debt
     },
     validationSchema: forSchema,
     onSubmit: (values) => {
+      console.log('values')
       const newDebt = expandedClient.debt - formik.values.payment
       Promise.all([
         fetch(`/clients/${expandedClient.id}`, {
@@ -21,7 +34,7 @@ export default function ExpandedClient({ expandedClient, onExpandClick, onUpdate
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ debt: newDebt }),
+          body: JSON.stringify({ debt: newDebt })
         }).then(response => response.json()),
         fetch(`/users/${user.id}`, {
           method: 'PATCH',
@@ -29,7 +42,7 @@ export default function ExpandedClient({ expandedClient, onExpandClick, onUpdate
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ earnings: user.earnings + formik.values.payment }),
+          body: JSON.stringify({ earnings: user.earnings + formik.values.payment })
         }).then(response => response.json()),
       ])
         .then(([clientData, userData]) => {
@@ -52,7 +65,7 @@ export default function ExpandedClient({ expandedClient, onExpandClick, onUpdate
         <div>
           <form onSubmit={formik.handleSubmit}>
             <div>
-              <label htmlFor='amountToCollect'>Payment: </label>
+              <label htmlFor='payment'>Payment: </label>
               <input
                 type='number'
                 id='payment'
@@ -62,7 +75,7 @@ export default function ExpandedClient({ expandedClient, onExpandClick, onUpdate
               />
               <p>{formik.errors.payment}</p>
             </div>
-            <button type='submit'>Collect Payment</button>
+            <button type="submit">Collect Payment</button>
           </form>
         </div>
       )}

@@ -89,11 +89,24 @@ class Signup(Resource):
 api.add_resource(Signup, '/signup', endpoint='signup')
 
 
-class Profile(Resource):
+class UsersById(Resource):
     def get(self):
         pass
+    def patch(self):
+        data = request.get_json()
+        try:
+            userPatch = User.query.get(session['user_id'])
+            for key, value in data.items():
+                setattr(userPatch, key, value)
+            db.session.commit()
+            return userPatch.to_dict(), 202
+        except Exception as error:
+            db.session.rollback()
+            return {'error': str(error)}, 500
+    def delete(self):
+        pass
 
-api.add_resource(Profile, '/profile', endpoint='profile')
+api.add_resource(UsersById, '/users/<int:id>', endpoint='users_by_id')
 
 class Requests(Resource):
     def get(self):
