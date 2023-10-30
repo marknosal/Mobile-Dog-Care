@@ -2,7 +2,7 @@ import React from 'react';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 
-export default function ExpandedClient({ expandedClient, onExpandClick, onUpdateClient, user, onUpdateUser }) {
+export default function ExpandedClient({ expandedClient, onExpandClick, onUpdateClient, user, onUpdateUser, setError }) {
 
   const forSchema = yup.object().shape({
     amountToCollect: yup.number().min(1).required('Must exist'),
@@ -37,6 +37,7 @@ export default function ExpandedClient({ expandedClient, onExpandClick, onUpdate
           onUpdateUser(userData);
           onExpandClick();
         })
+        .catch(error => setError(error))
     }
   })
   

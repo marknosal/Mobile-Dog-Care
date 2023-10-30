@@ -41,6 +41,7 @@ export default function Clients({
                 onUpdateUser={onUpdateUser}
                 onExpandClick={handleExpandClick} 
                 user={user}
+                setError={setError}
             />
         )
     }
