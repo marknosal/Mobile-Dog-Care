@@ -90,9 +90,9 @@ api.add_resource(Signup, '/signup', endpoint='signup')
 
 
 class UsersById(Resource):
-    def get(self):
+    def get(self, id):
         pass
-    def patch(self):
+    def patch(self, id):
         data = request.get_json()
         try:
             userPatch = User.query.get(session['user_id'])
