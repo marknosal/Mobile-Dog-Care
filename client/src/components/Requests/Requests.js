@@ -25,7 +25,11 @@ export default function Requests( { onUpdateClient }) {
     const expandedRequest = requests.find(r => r.id === expandedRequestId)
     //functions
     function handleExpandClick (requestId) {
-        expandedRequestId ? setExpandedRequestId(null) : setExpandedRequestId(requestId)
+        console.log(requestId)
+        requestId === expandedRequestId ? 
+            setExpandedRequestId(null) :
+            setExpandedRequestId(requestId)
+        // expandedRequestId ? setExpandedRequestId(null) : setExpandedRequestId(requestId)
     }
     function handleEditRequest(editedRequest) {
         const updatedRequests = requests.map(r =>
