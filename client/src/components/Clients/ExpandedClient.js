@@ -17,7 +17,7 @@ export default function ExpandedClient({
   }, [])
 
   const forSchema = yup.object().shape({
-    payment: yup.number().min(1).required('Must exist'),
+    payment: yup.number().min(1).max(expandedClient.debt).required('Must exist'),
   })
   const formik = useFormik({
     initialValues: {

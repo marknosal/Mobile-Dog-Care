@@ -51,6 +51,7 @@ class Login(Resource):
             if user.authenticate(password):
                 session['user_id'] = user.id
                 return user.to_dict(), 200
+            return {'error': 'Wrong Password'}, 401
         except Exception as e:
             return {'error': str(e)}, 401
 
