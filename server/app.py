@@ -268,7 +268,16 @@ class PetsById(Resource):
     def get(self, id):
         pass
     def patch(self, id):
-        pass
+        data = request.get_json()
+        try:
+            petPatch = Pet.query.get_or_404(id)
+            for key, value in data.items():
+                setattr(petPatch, key, value)
+            db.session.commit()
+            return petPatch.to_dict(), 202
+        except Exception as error:
+            db.session.rollback()
+            return {'error': str(error)}, 500
     def delete(self, id):
         pass
 
