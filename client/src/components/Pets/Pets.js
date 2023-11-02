@@ -33,9 +33,20 @@ export default function Pets() {
         )
     }
 
+    function handleEditPet(edittedPet) {
+        const updatedPets = pets.map(p => (
+            p.id === edittedPet.id ? edittedPet : p
+        ))
+        setPets(updatedPets)
+    }
+
     function expandedPetContainer() {
         return (
-            <ExpandedPet expandedPet={expandedPet} onExpandPet={handleExpandPet} />
+            <ExpandedPet 
+                expandedPet={expandedPet} 
+                onExpandPet={handleExpandPet} 
+                onEditPet={handleEditPet}
+            />
         )
     }
 
