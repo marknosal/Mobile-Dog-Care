@@ -75,11 +75,13 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEdi
         const petName = expandedRequest.pet ? expandedRequest.pet.name : "N/A";
         const petSpecies = expandedRequest.pet ? expandedRequest.pet.species : "N/A";
         const details = expandedRequest.details ? expandedRequest.details : 'N/A';
+        const clientName = expandedRequest.client.name ? expandedRequest.client.name : 'N/A';
         return (
             <div>
                 <div>
                     <h3>Request Details: </h3>
                     <ul>
+                        <li><strong>Client:</strong> {clientName}</li>
                         <li><strong>Pet name:</strong> {petName}</li>
                         <li><strong>Species:</strong> {petSpecies}</li>
                         <li><strong>Instructions:</strong> {details}</li>
