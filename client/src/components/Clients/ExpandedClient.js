@@ -25,7 +25,6 @@ export default function ExpandedClient({
     },
     validationSchema: forSchema,
     onSubmit: (values) => {
-      console.log('values')
       const newDebt = expandedClient.debt - formik.values.payment
       Promise.all([
         fetch(`/clients/${expandedClient.id}`, {
