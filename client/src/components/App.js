@@ -14,7 +14,7 @@ import {  UserContext } from "./contexts/UserContext";
 export default function App() {
 
   const [clients, setClients] = useState([]);
-  const { isLoggedIn } = useContext(UserContext)
+  const { user } = useContext(UserContext)
 
   function handleUpdateClient(updatedClient) {
     const updatedClients = clients.map(c => c.id === updatedClient.id ? updatedClient : c);
@@ -30,7 +30,7 @@ export default function App() {
       <div className="centered-div-title">
         <h1>Mobile Dog Care</h1>
       </div>
-        {isLoggedIn ? (
+        {user ? (
           <>
             <NavBar styles={{ center: 'auto' }} />
             <Switch>
