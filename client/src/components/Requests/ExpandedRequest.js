@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ClientContext } from '../contexts/ClientContext';
 
 
-export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEditRequest, onCompleteRequest, onDeleteRequest, onUpdateClient, onClearExpandedRequest }) {
+export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEditRequest, onCompleteRequest, onDeleteRequest, onClearExpandedRequest }) {
     const history = useHistory();
+    const { updateclient } = useContext(ClientContext)
 
     //state
     const [isEditMode, setIsEditMode] = useState(false);
@@ -184,7 +186,7 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEdi
             body: JSON.stringify({ debt: expandedRequest.client.debt + expandedRequest.price })
         })
             .then(response=>response.json())
-            .then(data=>onUpdateClient(data))
+            .then(data=>updateclient(data))
     }
 
     function handleDeleteButtonClick() {

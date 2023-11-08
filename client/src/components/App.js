@@ -8,22 +8,12 @@ import Pets from "./Pets/Pets";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import User from "./Users/User";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import {  UserContext } from "./contexts/UserContext";
+import { ClientProvider } from "./contexts/ClientContext";
 
 export default function App() {
-
-  const [clients, setClients] = useState([]);
   const { user } = useContext(UserContext)
-
-  function handleUpdateClient(updatedClient) {
-    const updatedClients = clients.map(c => c.id === updatedClient.id ? updatedClient : c);
-    setClients(updatedClients);
-  }
-
-  function handleAddClient(newClient) {
-    setClients([...clients, newClient]);
-  }
 
   return (
     <div>
@@ -31,7 +21,7 @@ export default function App() {
         <h1>Mobile Dog Care</h1>
       </div>
         {user ? (
-          <>
+          <ClientProvider>
             <NavBar styles={{ center: 'auto' }} />
             <Switch>
               <Route exact path='/'>
@@ -41,24 +31,17 @@ export default function App() {
                 <User />
               </Route>
               <Route exact path='/requests'>
-                <Requests
-                  onUpdateClient={handleUpdateClient}
-                />
+                <Requests />
               </Route>
               <Route exact path='/clients'>
-                <Clients
-                  clients={clients}
-                  onSetClients={setClients}
-                  onAddClient={handleAddClient}
-                  onUpdateClient={handleUpdateClient}
-                />
+                <Clients />
               </Route>
               <Route exact path='/pets'>
                 <Pets />
               </Route>
             </Switch>
             <ToastContainer />
-          </>
+          </ClientProvider>
         ) : (
           <Login />
         )}

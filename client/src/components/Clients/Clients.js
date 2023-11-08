@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useState } from "react"
 import Error from "../Error"
 import ClientCard from "./ClientCard"
 import ExpandedClient from "./ExpandedClient"
 import NewClientForm from "./NewClientForm"
 import "../../index.css"
+import { ClientContext } from "../contexts/ClientContext"
 
-export default function Clients({ 
-    clients, 
-    onSetClients, 
-    onAddClient, 
-    onUpdateClient, 
-}) {
+export default function Clients() {
+    const { clients } = useContext(ClientContext)
 
     const [expandedClientId, setExpandedClientId] = useState(null)
     const [error, setError] = useState(null)
@@ -18,16 +15,11 @@ export default function Clients({
 
     const expandedClient = clients.find(c => c.id === expandedClientId)
 
-    useEffect(() => {
-        fetch('/clients')
-            .then(response => response.json())
-            .then(data => onSetClients(data))
-    }, [])
+
 
     function expandedClientContainer() {
         return (
             <ExpandedClient
-                onUpdateClient={onUpdateClient}
                 expandedClient={expandedClient} 
                 onExpandClick={handleExpandClick} 
                 setError={setError}
@@ -65,7 +57,6 @@ export default function Clients({
                     <NewClientForm
                         onShowNewClientForm={handleShowNewClientForm}
                         setError={setError}
-                        onAddClient={onAddClient}
                     />
                 ) : (
                     expandedClientId ? expandedClientContainer() : clientCardContainer()

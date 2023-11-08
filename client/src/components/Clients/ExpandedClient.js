@@ -2,14 +2,15 @@ import React, { useContext, useEffect } from 'react';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { UserContext } from '../contexts/UserContext';
+import { ClientContext } from '../contexts/ClientContext';
 
 export default function ExpandedClient({ 
   expandedClient, 
   onExpandClick, 
-  onUpdateClient, 
   setError }) {
 
-    const { user, login } = useContext(UserContext)
+  const { user, login } = useContext(UserContext)
+  const { updateClient } = useContext(ClientContext)
 
   useEffect(() => {
     return () => {
@@ -46,7 +47,7 @@ export default function ExpandedClient({
         }).then(response => response.json()),
       ])
         .then(([clientData, userData]) => {
-          onUpdateClient(clientData);
+          updateClient(clientData);
           login(userData);
           onExpandClick();
         })

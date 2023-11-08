@@ -1,8 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { ClientContext } from "../contexts/ClientContext";
 
-export default function NewClientForm ({ onShowNewClientForm, setError, onAddClient }) {
+export default function NewClientForm ({ onShowNewClientForm, setError }) {
+
+    const { addClient } = useContext(ClientContext)
 
     useEffect(() => {
         return () => {
@@ -32,7 +35,7 @@ export default function NewClientForm ({ onShowNewClientForm, setError, onAddCli
             })
                 .then(response=>response.json())
                 .then(data=>{
-                    onAddClient(data)
+                    addClient(data)
                     onShowNewClientForm()
                 })
         }
