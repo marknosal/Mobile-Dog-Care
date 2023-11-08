@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import Error from "../Error";
-import { UserContext } from "../contexts/UserContext";
+import { UserContext } from "../Contexts/UserContext";
 
 
 export default function LogInForm () {

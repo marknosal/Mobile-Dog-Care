@@ -4,7 +4,7 @@ import ClientCard from "./ClientCard"
 import ExpandedClient from "./ExpandedClient"
 import NewClientForm from "./NewClientForm"
 import "../../index.css"
-import { ClientContext } from "../contexts/ClientContext"
+import { ClientContext } from "../Contexts/ClientContext"
 
 export default function Clients() {
     const { clients } = useContext(ClientContext)

@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import "../../index.css"
-import { UserContext } from "../contexts/UserContext"
+import { UserContext } from "../Contexts/UserContext"
 
 export default function User() {
     const { user, logout } = useContext(UserContext)

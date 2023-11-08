@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { ClientContext } from "../contexts/ClientContext";
+import { ClientContext } from "../Contexts/ClientContext";
 
 export default function NewClientForm ({ onShowNewClientForm, setError }) {
 

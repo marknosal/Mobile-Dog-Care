@@ -9,8 +9,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import User from "./Users/User";
 import React, { useContext } from "react";
-import {  UserContext } from "./contexts/UserContext";
-import { ClientProvider } from "./contexts/ClientContext";
+import {  UserContext } from "./Contexts/UserContext";
+import { ClientProvider } from "./Contexts/ClientContext";
 
 export default function App() {
   const { user } = useContext(UserContext)

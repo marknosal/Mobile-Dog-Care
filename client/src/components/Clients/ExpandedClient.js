@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
-import { UserContext } from '../contexts/UserContext';
-import { ClientContext } from '../contexts/ClientContext';
+import { UserContext } from '../Contexts/UserContext';
+import { ClientContext } from '../Contexts/ClientContext';
 
 export default function ExpandedClient({ 
   expandedClient, 

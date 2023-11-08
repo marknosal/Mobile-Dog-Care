@@ -4,7 +4,7 @@ import * as yup from 'yup';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { ClientContext } from '../contexts/ClientContext';
+import { ClientContext } from '../Contexts/ClientContext';
 
 
 export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEditRequest, onCompleteRequest, onDeleteRequest, onClearExpandedRequest }) {
