@@ -4,7 +4,7 @@ import IncompleteRequests from "./IncompleteRequests"
 import ExpandedRequest from "./ExpandedRequest"
 import Error from "../Error"
 
-export default function Requests( { onUpdateClient }) {
+export default function Requests() {
     // state
     const [requests, setRequests] = useState([])
     const [expandedRequestId, setExpandedRequestId] = useState(null)
@@ -72,8 +72,7 @@ export default function Requests( { onUpdateClient }) {
                     onEditRequest = {handleEditRequest}
                     onDeleteRequest = {handleDeleteRequest}
                     onExpandClick = {handleExpandClick}
-                    onClearExpandedRequest = {handleClearExpandedRequest}
-                    onUpdateClient = {onUpdateClient} /> : 
+                    onClearExpandedRequest = {handleClearExpandedRequest} /> : 
                 <IncompleteRequests 
                     incompleteRequests = {incompleteRequests}
                     onAddRequest = {handleAddRequest}

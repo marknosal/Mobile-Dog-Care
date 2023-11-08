@@ -9,7 +9,7 @@ import { ClientContext } from '../Contexts/ClientContext';
 
 export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEditRequest, onCompleteRequest, onDeleteRequest, onClearExpandedRequest }) {
     const history = useHistory();
-    const { updateclient } = useContext(ClientContext)
+    const { updateClient } = useContext(ClientContext)
 
     //state
     const [isEditMode, setIsEditMode] = useState(false);
@@ -186,7 +186,7 @@ export default function ExpandedRequest ({ expandedRequest, onExpandClick, onEdi
             body: JSON.stringify({ debt: expandedRequest.client.debt + expandedRequest.price })
         })
             .then(response=>response.json())
-            .then(data=>updateclient(data))
+            .then(data=>updateClient(data))
     }
 
     function handleDeleteButtonClick() {

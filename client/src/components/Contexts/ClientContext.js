@@ -1,15 +1,9 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState } from "react";
 
 const ClientContext = createContext([])
 
 function ClientProvider({ children }) {
     const [clients, setClients] = useState([]);
-
-    useEffect(() => {
-        fetch('/clients')
-            .then(response => response.json())
-            .then(data => setClients(data))
-    }, [])
 
     function addClient(newClient) {
         setClients([...clients, newClient]);
@@ -21,7 +15,7 @@ function ClientProvider({ children }) {
 
 
     return (
-        <ClientContext.Provider value={{ clients, addClient, updateClient }}>
+        <ClientContext.Provider value={{ clients, setClients, addClient, updateClient }}>
             { children }
         </ClientContext.Provider>
     )

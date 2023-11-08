@@ -82,7 +82,7 @@ class Signup(Resource):
             session['user_id'] = new_user.id
             return new_user.to_dict(), 201
         except Exception as e:
-            return {'error': str(e)}, 422
+            return {'error': f'Username {username} is unavailable'}, 422
         
 api.add_resource(Signup, '/signup', endpoint='signup')
 

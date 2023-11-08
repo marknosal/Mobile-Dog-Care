@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useState, useEffect } from "react"
 import Error from "../Error"
 import ClientCard from "./ClientCard"
 import ExpandedClient from "./ExpandedClient"
@@ -7,7 +7,13 @@ import "../../index.css"
 import { ClientContext } from "../Contexts/ClientContext"
 
 export default function Clients() {
-    const { clients } = useContext(ClientContext)
+    const { clients, setClients } = useContext(ClientContext)
+
+    useEffect(() => {
+        fetch('/clients')
+            .then(response => response.json())
+            .then(data => setClients(data))
+    }, [])
 
     const [expandedClientId, setExpandedClientId] = useState(null)
     const [error, setError] = useState(null)
