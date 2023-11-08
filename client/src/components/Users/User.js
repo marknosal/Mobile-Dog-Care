@@ -1,13 +1,15 @@
-import React from "react"
+import React, { useContext } from "react"
 import "../../index.css"
+import { UserContext } from "../contexts/UserContext"
 
-export default function User({ user, onLogout }) {
+export default function User() {
+    const { user, logout } = useContext(UserContext)
 
     function handleClick() {
         fetch('/logout', { method: 'DELETE' })
             .then(response => {
                 if (response.ok) {
-                    onLogout(null)
+                    logout()
                 }
             })
     }

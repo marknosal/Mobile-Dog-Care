@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import Error from "../Error";
+import { UserContext } from "../contexts/UserContext";
 
-export default function SignUpForm ({ onLogin }) {
+export default function SignUpForm () {
     const [error, setError ] = useState(null)
+
+    const { login } = useContext(UserContext)
+
     const forSchema = yup.object().shape({
         username: yup.string().min(5).required('Must exist'),
         name: yup.string().min(5).required('Must exist'),
@@ -16,6 +20,7 @@ export default function SignUpForm ({ onLogin }) {
             .min(5)
             .required('Must exist')
     })
+
     const formik = useFormik({
         initialValues: {
             username: '',
@@ -38,7 +43,7 @@ export default function SignUpForm ({ onLogin }) {
                 .then(response => {
                     if (response.ok) {
                         response.json()
-                            .then(data => onLogin(data))
+                            .then(data => login(data))
                     } else {
                         response.json()
                             .then(data => setError(data))
@@ -47,6 +52,7 @@ export default function SignUpForm ({ onLogin }) {
                 
         }
     })
+
     return (
         <div className="signup-form">
             <h2>Signup Form</h2>

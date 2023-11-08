@@ -4,6 +4,7 @@ import App from "./components/App";
 import "./index.css";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
+import { UserProvider } from "./components/contexts/UserContext";
 
 // ReactDOM.render(
 //     <Router>
@@ -16,6 +17,8 @@ const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
     <Router>
-        <App />
+        <UserProvider>
+            <App />
+        </UserProvider>
     </Router>
     );

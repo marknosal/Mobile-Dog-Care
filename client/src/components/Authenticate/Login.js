@@ -2,13 +2,13 @@ import { useState } from "react"
 import SignUpForm from "./SignUpForm"
 import LogInForm from "./LogInForm"
 
-export default function Login({ onLogin }) {
+export default function Login() {
     const [showSignUp, setShowSignUp] = useState(false)
     return (
         <div>
             {showSignUp ? (
                 <div>
-                    <SignUpForm onLogin={onLogin} />
+                    <SignUpForm />
                     <hr />
                     <p>
                         Already have an account?
@@ -19,7 +19,7 @@ export default function Login({ onLogin }) {
                 </div>
             ) : (
                 <div>
-                    <LogInForm onLogin={onLogin} />
+                    <LogInForm />
                     <hr />
                     <p>
                         Don't have an account?

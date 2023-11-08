@@ -10,8 +10,6 @@ export default function Clients({
     onSetClients, 
     onAddClient, 
     onUpdateClient, 
-    onUpdateUser,
-    user
 }) {
 
     const [expandedClientId, setExpandedClientId] = useState(null)
@@ -31,9 +29,7 @@ export default function Clients({
             <ExpandedClient
                 onUpdateClient={onUpdateClient}
                 expandedClient={expandedClient} 
-                onUpdateUser={onUpdateUser}
                 onExpandClick={handleExpandClick} 
-                user={user}
                 setError={setError}
             />
         )

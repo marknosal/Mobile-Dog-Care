@@ -1,14 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import Error from "../Error";
+import { UserContext } from "../contexts/UserContext";
 
-export default function LogInForm ({ onLogin }) {
+
+export default function LogInForm () {
     const [error, setError] = useState(null)
+    const { login } = useContext(UserContext)
+
+
     const forSchema = yup.object().shape({
         username: yup.string().required('Must exist'),
         password: yup.string().required('Must exist')
     })
+
     const formik = useFormik({
         initialValues: {
             username: '',
@@ -27,7 +33,9 @@ export default function LogInForm ({ onLogin }) {
                 .then(response => {
                     if (response.ok) {
                         response.json()
-                            .then(data => onLogin(data))
+                            .then(data => {
+                                login(data)
+                            })
                     } else {
                         response.json()
                             .then(data => setError(data))
@@ -35,6 +43,7 @@ export default function LogInForm ({ onLogin }) {
                 })
         }
     })
+    
     return (
         <div className="login-form">
             <h2>Login Form</h2>

@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
+import { UserContext } from '../contexts/UserContext';
 
 export default function ExpandedClient({ 
   expandedClient, 
   onExpandClick, 
   onUpdateClient, 
-  user, 
-  onUpdateUser, 
   setError }) {
+
+    const { user, login } = useContext(UserContext)
 
   useEffect(() => {
     return () => {
@@ -46,7 +47,7 @@ export default function ExpandedClient({
       ])
         .then(([clientData, userData]) => {
           onUpdateClient(clientData);
-          onUpdateUser(userData);
+          login(userData);
           onExpandClick();
         })
         .catch(error => setError(error))
