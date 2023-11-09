@@ -44,7 +44,9 @@ class Login(Resource):
         username = data.get('username')
         password = data.get('password')
         try:
-            user = User.query.filter_by(username=username).first()
+            user = User.query.filter_by(username=username).one_or_none()
+            if not user:
+                return { 'error': f'Username: {username} not found'}, 404
             if user.authenticate(password):
                 session['user_id'] = user.id
                 return user.to_dict(), 200
